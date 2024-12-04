@@ -9,6 +9,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { MatchCardComponent } from './match-card/match-card.component';
 import { MatchPageComponent } from './match-page/match-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(withEventReplay())

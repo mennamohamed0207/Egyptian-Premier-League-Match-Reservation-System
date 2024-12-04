@@ -16,7 +16,6 @@ export class SignUpComponent  implements OnInit {
       lastname:new FormControl(null, [Validators.required]),
       username: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       password: new FormControl(null, [Validators.required]),
-      retypePassword: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       age: new FormControl(null,[Validators.required]),
       gender: new FormControl(null,[Validators.required]),

@@ -39,20 +39,7 @@
 
             </div>
 
-            <!-- Re-type Password Input -->
-            <div class="form-group">
-                <label for="password">Re-type Password</label>
-                <input type="password" placeholder="Re-type Password" name="retypePassword"
-                    formControlName="retypePassword"
-                    [ngClass]="{'ng-invalid': myForm.errors?.['passwordMismatch'] && myForm.get('retypePassword')?.touched}">
-                <div class="errorEmpty"
-                    *ngIf="myForm.get('retypePassword')?.touched&& myForm.errors?.['passwordMismatch']&& !myForm.get('retypePassword')?.valid">
-                    <div
-                        *ngIf="(myForm.get('retypePassword')?.errors?.['required'])&&!myForm.get('retypePassword')?.valid">
-                        You should retype your password</div>
-                    <div *ngIf="myForm.errors?.['passwordMismatch']"> Passwords must be matched</div>
-                </div>
-            </div>
+            
 
             <!-- Email Input -->
             <div class="form-group">
@@ -125,7 +112,7 @@
                 </div>
                 <div class="errorEmpty" *ngIf="myForm.get('gender')?.touched && !myForm.get('gender')?.valid">
 
-                <div *ngIf="myForm.get('gender')?.errors?.['required']">Gender is required</div>
+                    <div *ngIf="myForm.get('gender')?.errors?.['required']">Gender is required</div>
                 </div>
             </div>
 
@@ -141,7 +128,7 @@
                     <label for="radio2">Fan</label>
                 </div>
                 <div class="errorEmpty" *ngIf="myForm.get('role')?.touched && !myForm.get('role')?.valid">
-                <div *ngIf="myForm.get('role')?.errors?.['required']">Gender is required</div>
+                    <div *ngIf="myForm.get('role')?.errors?.['required']">Gender is required</div>
                 </div>
             </div>
 

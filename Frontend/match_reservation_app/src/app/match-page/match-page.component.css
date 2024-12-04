@@ -1,0 +1,76 @@
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.away-team,
+.home-team {
+  flex: 2; /* Each box takes an equal share of the available space */
+  text-align: center; /* Optional: to center content */
+  width: 400px; /* Set the desired width */
+
+}
+.information {
+  flex: 3; /* Each box takes an equal share of the available space */
+  margin-top: 150px;
+  text-align:center ; Optional: to center content
+}
+/* Match Information Styling */
+
+.team-img {
+  max-width: 100%; /* Ensures the image width does not exceed the container */
+  max-height: 100%; /* Ensures the image height does not exceed the container */
+  object-fit: cover; /* Keeps the image's aspect ratio and fits it within the container */
+}
+
+.information p {
+  font-weight: bold;
+  font-size:large ;
+  color: #222;
+}
+.teams-name {
+  /* bold  */
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.grid {
+    flex: 1;
+    display: flex;
+    width: 80%;
+    height: 500px;
+    border-radius: 40px;
+    flex-direction: column;
+    gap: 20px; /* Space between rows */
+
+    background-image: url("../../../public/playground_2d_2.png");
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensures the image covers the entire container */
+    background-position: center; /* Centers the image */
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
+
+.row {
+  display: flex;
+  gap: 20px; /* Space between seats */
+}
+
+.col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img.chair {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+  background-color: rgb(141, 216, 67);
+  border-radius: 30px;
+}
+

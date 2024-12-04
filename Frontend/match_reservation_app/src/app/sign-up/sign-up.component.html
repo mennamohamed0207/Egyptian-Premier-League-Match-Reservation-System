@@ -1,1 +1,162 @@
-<p>sign-up works!</p>
+<div class="body">
+    <div class="form-container">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+            <div class="showhorizontal">
+                <div class="form-group">
+                    <label for="text">First Name</label>
+                    <input type="text" placeholder="FirstName" name="firstname" formControlName="firstname">
+                    <div class="errorEmpty" *ngIf="myForm.get('firstname')?.touched && !myForm.get('firstname')?.valid">
+                        <div *ngIf="myForm.get('firstname')?.errors?.['required']">First Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text">Last Name</label>
+                    <input type="text" placeholder="Last Name" name="lastname" formControlName="lastname">
+                    <div class="errorEmpty" *ngIf="myForm.get('lastname')?.touched && !myForm.get('lastname')?.valid">
+                        <div *ngIf="myForm.get('lastname')?.errors?.['required']">Last Name is required</div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Text Input -->
+            <div class="form-group">
+                <label for="text">Username</label>
+                <input type="text" placeholder="Username" name="username" formControlName="username">
+                <div class="errorEmpty" *ngIf="myForm.get('username')?.touched && !myForm.get('username')?.valid">
+                    <div *ngIf="myForm.get('username')?.errors?.['required']">Username is required</div>
+                    <div *ngIf="myForm.get('username')?.errors?.['minlength']">Minimum length is 3</div>
+                </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Enter password" name="password" formControlName="password">
+                <div class="errorEmpty" *ngIf="myForm.get('password')?.touched && !myForm.get('password')?.valid">
+                    <div *ngIf="myForm.get('password')?.errors?.['required']">Password is required</div>
+                    <div *ngIf="myForm.get('password')?.errors?.['passwordStrength']">Password is not valid</div>
+                </div>
+
+            </div>
+
+            <!-- Re-type Password Input -->
+            <div class="form-group">
+                <label for="password">Re-type Password</label>
+                <input type="password" placeholder="Re-type Password" name="retypePassword"
+                    formControlName="retypePassword"
+                    [ngClass]="{'ng-invalid': myForm.errors?.['passwordMismatch'] && myForm.get('retypePassword')?.touched}">
+                <div class="errorEmpty"
+                    *ngIf="myForm.get('retypePassword')?.touched&& myForm.errors?.['passwordMismatch']&& !myForm.get('retypePassword')?.valid">
+                    <div
+                        *ngIf="(myForm.get('retypePassword')?.errors?.['required'])&&!myForm.get('retypePassword')?.valid">
+                        You should retype your password</div>
+                    <div *ngIf="myForm.errors?.['passwordMismatch']"> Passwords must be matched</div>
+                </div>
+            </div>
+
+            <!-- Email Input -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Enter email" name="email" formControlName="email">
+                <div class="errorEmpty" *ngIf="myForm.get('email')?.touched && !myForm.get('email')?.valid">
+                    <div *ngIf="myForm.get('email')?.errors?.['required']">Email is required</div>
+                    <div *ngIf="myForm.get('email')?.errors?.['email']">Email is not valid</div>
+                </div>
+
+            </div>
+
+            <!-- Number Input -->
+            <div class="form-group">
+                <label for="number">Age</label>
+                <input type="number" placeholder="Age" name="age" formControlName="age">
+                <div class="errorEmpty" *ngIf="myForm.get('age')?.touched && !myForm.get('age')?.valid">
+                    <div *ngIf="myForm.get('age')?.errors?.['required']">Age is required</div>
+                </div>
+
+            </div>
+
+            <!-- Date Input -->
+            <div class="form-group">
+                <label for="date">Birth Date</label>
+                <input type="date" name="birthDate" formControlName="birthDate">
+                <div class="errorEmpty" *ngIf="myForm.get('birthDate')?.touched && !myForm.get('age')?.valid">
+
+                    <div *ngIf="myForm.get('birthDate')?.errors?.['required']">Birth Date is required</div>
+                </div>
+            </div>
+
+            <!-- Address Input -->
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="address" placeholder="Address" name="address" formControlName="address">
+            </div>
+
+            <!-- City Input -->
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="city" placeholder="city" name="city" formControlName="city">
+                <div class="errorEmpty" *ngIf="myForm.get('city')?.touched && !myForm.get('city')?.valid">
+
+                    <div *ngIf="myForm.get('city')?.errors?.['required']">City is required</div>
+                </div>
+
+            </div>
+
+            <!-- Telephone Input -->
+            <div class="form-group">
+                <label for="tel">Phone NO.</label>
+                <input type="tel" placeholder="Phone NO." name="phone" formControlName="phone">
+                <div class="errorEmpty" *ngIf="myForm.get('phone')?.touched && !myForm.get('phone')?.valid">
+
+                    <div *ngIf="myForm.get('phone')?.errors?.['required']">Gender is required</div>
+                </div>
+            </div>
+
+            <!-- Radio Buttons -->
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="form-group-inline">
+                    <input type="radio" id="radio1" name="gender" value="female" formControlName="gender">
+                    <label for="radio1">Female</label>
+                </div>
+                <div class="form-group-inline">
+                    <input type="radio" id="radio2" name="gender" value="male" formControlName="gender">
+                    <label for="radio2">Male</label>
+                </div>
+                <div class="errorEmpty" *ngIf="myForm.get('gender')?.touched && !myForm.get('gender')?.valid">
+
+                <div *ngIf="myForm.get('gender')?.errors?.['required']">Gender is required</div>
+                </div>
+            </div>
+
+            <!-- Radio Buttons -->
+            <div class="form-group">
+                <label>Role</label>
+                <div class="form-group-inline">
+                    <input type="radio" id="radio2" name="role" value="manager" formControlName="role">
+                    <label for="radio2">Manager</label>
+                </div>
+                <div class="form-group-inline">
+                    <input type="radio" id="radio2" name="role" value="fan" formControlName="role">
+                    <label for="radio2">Fan</label>
+                </div>
+                <div class="errorEmpty" *ngIf="myForm.get('role')?.touched && !myForm.get('role')?.valid">
+                <div *ngIf="myForm.get('role')?.errors?.['required']">Gender is required</div>
+                </div>
+            </div>
+
+
+
+            <!-- Checkbox -->
+            <div class="form-group-inline">
+                <input type="checkbox" id="terms" name="terms" formControlName="terms">
+                <label for="terms">Agree to terms and conditions</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group text-center">
+                <input type="submit" value="Join Us" [disabled]="myForm.invalid" />
+            </div>
+        </form>
+    </div>
+</div>

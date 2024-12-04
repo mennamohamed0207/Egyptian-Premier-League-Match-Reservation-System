@@ -108,7 +108,7 @@
                 <input type="tel" placeholder="Phone NO." name="phone" formControlName="phone">
                 <div class="errorEmpty" *ngIf="myForm.get('phone')?.touched && !myForm.get('phone')?.valid">
 
-                    <div *ngIf="myForm.get('phone')?.errors?.['required']">Gender is required</div>
+                    <div *ngIf="myForm.get('phone')?.errors?.['required']">Phone Number is required</div>
                 </div>
             </div>
 

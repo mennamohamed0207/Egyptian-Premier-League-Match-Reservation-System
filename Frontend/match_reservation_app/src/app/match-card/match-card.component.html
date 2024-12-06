@@ -1,1 +1,13 @@
-<p>match-card works!</p>
+<div class="match-card">
+    <div class="match-header">
+        <h3>{{ match.homeTeam }} vs {{ match.awayTeam }}</h3>
+        <p>{{ match.date | date: 'mediumDate' }} - {{ match.time }}</p>
+    </div>
+    <div class="match-body">
+        <img src="{{ match.stadiumImage }}" alt="Stadium" class="stadium-image" />
+        <p><strong>Location:</strong> {{ match.stadium }}</p>
+    </div>
+    <div class="match-footer">
+        <button class="cta-button" (click)="bookTicket(match.id)">Book Ticket</button>
+    </div>
+</div>

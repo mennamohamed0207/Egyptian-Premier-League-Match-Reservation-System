@@ -1,1 +1,29 @@
-<p>home-page works!</p>
+<app-header></app-header>
+
+<div class="hero-section">
+    <div class="overlay">
+        <h1>Book your match now</h1>
+        <p>Find all matches you want</p>
+        <button class="cta-button">Book your Ticket</button>
+    </div>
+</div>
+
+<!-- <div class="features-section">
+    <div class="feature">
+        <h3>Easy to use.</h3>
+        <p>Convenient and simple way to book your match and see your favorite team play.</p>
+    </div>
+    <div class="feature">
+        <h3>Time saver.</h3>
+        <p>Just open the website, choose your match, and avoid the hassle of booking a ticket.</p>
+    </div>
+    <div class="feature">
+        <h3>Guaranteed to work.</h3>
+        <p>Based on fan reviews, reliability is one of our main concerns.</p>
+    </div>
+</div> -->
+<div class="grid">
+<app-match-card *ngFor="let match of matches" [match]="match"></app-match-card>
+</div>
+
+<app-footer></app-footer>

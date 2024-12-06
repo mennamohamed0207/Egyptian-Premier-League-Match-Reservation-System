@@ -10,6 +10,8 @@ import { MatchCardComponent } from './match-card/match-card.component';
 import { MatchPageComponent } from './match-page/match-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomePageComponent,
     MatchCardComponent,
     MatchPageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-.container {
+.secondary_container {
   display: flex;
   width: 100%;
 }
@@ -8,12 +8,10 @@
   flex: 2; /* Each box takes an equal share of the available space */
   text-align: center; /* Optional: to center content */
   width: 400px; /* Set the desired width */
-
 }
 .information {
   flex: 3; /* Each box takes an equal share of the available space */
-  margin-top: 150px;
-  text-align:center ; Optional: to center content
+  text-align: center;
 }
 /* Match Information Styling */
 
@@ -25,33 +23,31 @@
 
 .information p {
   font-weight: bold;
-  font-size:large ;
+  font-size: large;
   color: #222;
 }
 .teams-name {
-  /* bold  */
   margin-top: 30px;
   margin-bottom: 20px;
   font-weight: bold;
   font-size: xx-large;
 }
-
+.container {
+  background-image: url("../../../public/playground_3d.png");
+  background-repeat: no-repeat;
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  height: 1000px;
+}
 .grid {
-    flex: 1;
-    display: flex;
-    width: 80%;
-    height: 500px;
-    border-radius: 40px;
-    flex-direction: column;
-    gap: 20px; /* Space between rows */
-
-    background-image: url("../../../public/playground_2d_2.png");
-    background-repeat: no-repeat;
-    background-size: cover; /* Ensures the image covers the entire container */
-    background-position: center; /* Centers the image */
-    justify-content: center;
-    align-items: center;
-    margin: 50px;
+  /* flex: 1; */
+  display: flex;
+  width: 100%;
+  border-radius: 40px;
+  flex-direction: column;
+  gap: 20px; /* Space between rows */
+  justify-content: center;
+  align-items: center;
 }
 
 .row {
@@ -65,12 +61,27 @@
   align-items: center;
 }
 
-img.chair {
-  width: 50px;
-  height: 50px;
+.chair {
+  width: 80px;
+  height: 80px;
   cursor: pointer;
   transition: transform 0.2s, border-color 0.2s;
-  background-color: rgb(141, 216, 67);
-  border-radius: 30px;
+  background-color: rgb(250, 250, 250);
+  background-image: url("../../../public/chair.png");
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  border: none;
+
+  border-radius: 40px;
+}
+
+.information .Date {
+  font-size: 3.5em; /* Larger font size */
+  font-weight: bold; /* Optional: emphasize the text */
+}
+.information .MatchVenue,
+.information .MainReferee,
+.information .TwoLinesmen {
+  font-size: large;
 }
 

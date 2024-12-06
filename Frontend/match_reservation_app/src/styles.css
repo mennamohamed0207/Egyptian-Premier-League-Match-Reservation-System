@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Roboto', sans-serif;; /* Replace 'Arial' with your desired font */
+}
 /* CSS HEX */
 /* --dark-green: #132a13ff;
 --hunter-green: #31572cff;

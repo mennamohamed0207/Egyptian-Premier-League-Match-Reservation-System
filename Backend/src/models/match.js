@@ -1,11 +1,8 @@
 const { connectToDatabase } = require('../db');
 const mongoose = require('mongoose');
-const autoIncrement = require('mongoose-auto-increment');
 
-autoIncrement.initialize(mongoose.connection);
 
 const matchSchema = new mongoose.Schema({
-    matchID: { type: String, unique: true, required: true },
     homeTeam: { type: String, required: true },
     awayTeam: { type: String, required: true },
     stadiumID: { type: mongoose.Schema.Types.ObjectId, ref: 'Stadium', required: true },
@@ -25,7 +22,6 @@ const matchSchema = new mongoose.Schema({
     linesman2: { type: String, required: true },
 });
 
-matchSchema.plugin(autoIncrement.plugin, { model: 'Match', field: 'matchID' });
 module.exports = mongoose.model('Match', matchSchema);
 
 

@@ -23,10 +23,9 @@ export class SignUpComponent  implements OnInit {
       city: new FormControl(null,[Validators.required]),
       phone: new FormControl(null,[Validators.required]),
       birthDate: new FormControl(null,[Validators.required]),
-      terms: new FormControl(null,[Validators.required]),
+      terms: new FormControl(null, [Validators.requiredTrue]), // Use Validators.requiredTrue for checkbox
       role:new FormControl(null,[Validators.required])
     },);
-    console.log(this.myForm);
     
   }
   onSubmit() {

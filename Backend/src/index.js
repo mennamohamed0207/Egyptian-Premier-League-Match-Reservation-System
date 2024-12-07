@@ -3,7 +3,7 @@ const { connectToDatabase } = require('./db');
 const matchController = require('./controllers/matchController');
 const swaggerUI = require("swagger-ui-express");
 const swaggerSpec = require("../swagger");
-const authRoutes = require('./controllers/auth'); 
+const authRoutes = require('./controllers/userController'); 
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,7 +14,7 @@ app.get('/match', matchController.getMatches);
 app.post('/match', matchController.createMatch);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
-app.use('/', authRoutes);
+app.use('/user', authRoutes);
 
 connectToDatabase()
   .then(() => {

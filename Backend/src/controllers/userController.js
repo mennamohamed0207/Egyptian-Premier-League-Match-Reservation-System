@@ -30,6 +30,7 @@ const router = express.Router();
  *                 type: string
  *               birthdate:
  *                 type: string
+ *                 format: date
  *               gender:
  *                 type: string
  *               city:
@@ -163,6 +164,7 @@ router.get('/:username', verifyToken, async (req, res) => {
  *                 type: string
  *               birthdate:
  *                 type: string
+ *                 format: date
  *               gender:
  *                 type: string
  *               city:
@@ -257,7 +259,10 @@ router.get('/users', verifyToken, async (req, res) => {
  *             type: object
  *             properties:
  *               status:
- *                 type: enum:'Pending', 'Approved'
+ *                 type: string
+ *                 enum:
+ *                  - Pending
+ *                  - Approved
  *     responses:
  *       200:
  *         description: Successful edit
@@ -342,4 +347,68 @@ router.delete('/:username', verifyToken, async (req, res) => {
     }
 })
 
+/**
+ * @swagger
+ * /user/{username}/change-password:
+ *   put:
+ *     summary: User can change password
+ *     security:
+ *       - JWT: []  
+ *     parameters:
+ *       - in: path
+ *         name: username
+ *         required: true
+ *         description: The username of the user to edit
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               newPassword:
+ *                 type: string
+ *               confirmPassword:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Successful edit
+ *       400:
+ *         description: Bad request
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Error in approve authority
+ * components:
+ *   securitySchemes:
+ *     JWT:
+ *       type: apiKey
+ *       in: header
+ *       name: JWT-Token
+ */
+router.put('/:username/change-password',verifyToken,async (req,res)=>{
+    try{
+        const username = req.params.username; 
+        const {newPassword, confirmPassword} = req.body;
+        if(newPassword !== confirmPassword){
+            return res.status(400).json({error: "Password mismatch"})
+        }
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const update = { password:hashedPassword  }
+        const user = await User.findOneAndUpdate({ 'username': username }, update, { new: true })
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json({ message: `Password changed`, user })
+
+    }
+    catch(error){
+        res.status(500).json({error: `Error in change password: ${error.message}`})
+    }
+})
+
+
+//todo check authority for admins
 module.exports = router;

@@ -1,33 +1,56 @@
-<div class="container">
-  <div class="secondary_container">
-    <div class="home-team">
-      <img class="team-img" src="Al_Ahly.png" alt="Al_Ahly" />
-      <p class="teams-name">Al Ahly</p>
-    </div>
-    <div class="information">
-      <p class="Date">7:00 pm</p>
-      <p class="MatchVenue">cairo stadium 
- Main Referee 
- Two Linesmen</p>
-    </div>
-    <div class="away-team">
-      <img class="team-img" src="AL_Zamalek.png" alt="Al_Zamalek" />
-      <p class="teams-name">Al Zamalek</p>
-    </div>
-  </div>
-  
-  <div class="secondary_container">
-    <div class="grid ">
-      <div class="row" *ngFor="let row of [].constructor(rows); let i = index">
-        <div
-        class="col"
-        *ngFor="let col of [].constructor(cols); let j = index">
-        <button class="chair" [ngStyle]="{ 'background-color': chairs_colors[i][j] }" (click) = "changeColor(i,j)"></button>
+<div class="match-page">
+  <div class="container">
+  <!-- Match Details Section -->
+  <div class="match-details card shadow-lg mb-4 p-4">
+    <div class="row align-items-center">
+      <div class="col text-center">
+        <img class="team-img" src="Al_Ahly1.png" alt="Al Ahly" />
+        <h3 class="teams-name">Al Ahly</h3>
+      </div>
+      <div class="col text-center">
+        <p class="match-time text-primary font-weight-bold">7:00 PM</p>
+        <p class="match-venue">
+          <i class="fas fa-map-marker-alt"></i> Cairo Stadium <br />
+          <i class="fas fa-user-tie"></i> Main Referee <br />
+          <i class="fas fa-users"></i> Two Linesmen
+        </p>
+      </div>
+      <div class="col text-center">
+        <img class="team-img" src="AL_Zamalek.png" alt="Al Zamalek" />
+        <h3 class="teams-name">Al Zamalek</h3>
       </div>
     </div>
-  </div>  
-</div>
-<div class="d-flex justify-content-center m-5">
-<button type="button" class="btn btn-success btn-lg">Purshase</button>
+  </div>
+
+  <!-- Seat Reservation Section -->
+  <div class="seat-reservation card shadow-lg p-4">
+    <h4 class="seat-reservation-title text-center mb-3">Seat Reservation</h4>
+    <div class="grid">
+      <div class="row" *ngFor="let row of [].constructor(rows); let i = index">
+        <div
+          class="col text-center"
+          *ngFor="let col of [].constructor(cols); let j = index"
+        >
+          <button
+            class="chair"
+            [ngStyle]="{ 'background-color': chairs_colors[i][j] }"
+            (click)="changeColor(i, j)"
+          ></button>
+        </div>
+      </div>
+    </div>
+    <div class="seat-legend mt-3">
+      <span class="badge badge-success">Available</span>
+      <span class="badge badge-danger">Reserved</span>
+      <span class="badge badge-warning">Selected</span>
+    </div>
+  </div>
+
+  <!-- Purchase Button -->
+  <div class="purchase-button d-flex justify-content-center mt-5">
+    <button type="button" class="purchase-btn btn btn-success btn-lg">
+      Purchase Selected Seats
+    </button>
+  </div>
 </div>
 </div>

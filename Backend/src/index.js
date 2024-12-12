@@ -20,6 +20,7 @@ connectToDatabase()
   .then(() => {
     app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
+      console.log(`Swagger UI on http://localhost:${port}/api-docs`);
     });
   })
   .catch((err) => {

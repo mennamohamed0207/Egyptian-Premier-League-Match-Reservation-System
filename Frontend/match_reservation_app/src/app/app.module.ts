@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AddMatchComponent } from './add-match/add-match.component';
+import { AddStadiumComponent } from './add-stadium/add-stadium.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AddMatchComponent } from './add-match/add-match.component';
     ProfilePageComponent,
     HeaderComponent,
     FooterComponent,
-    AddMatchComponent
+    AddMatchComponent,
+    AddStadiumComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,32 @@
+<div class="add-stadium-container">
+    <div class="form-card">
+        <h2 class="form-title">Add New Stadium</h2>
+        <form [formGroup]="stadiumForm" (ngSubmit)="onSubmit()">
+            <!-- Stadium Name -->
+            <div class="form-group">
+                <label for="stadiumName">Stadium Name:</label>
+                <input type="text" id="stadiumName" formControlName="stadiumName" placeholder="Enter stadium name"
+                    required />
+            </div>
+
+            <!-- Number of Rows -->
+            <div class="form-group">
+                <label for="rows">Number of Rows in VIP Lounge:</label>
+                <input type="number" id="rows" formControlName="rows" placeholder="Enter number of rows" required
+                    min="1" />
+            </div>
+
+            <!-- Number of Seats per Row -->
+            <div class="form-group">
+                <label for="seatsPerRow">Number of Seats per Row:</label>
+                <input type="number" id="seatsPerRow" formControlName="seatsPerRow"
+                    placeholder="Enter number of seats per row" required min="1" />
+            </div>
+
+            <!-- Actions -->
+            <div class="form-actions">
+                <button type="submit" [disabled]="!stadiumForm.valid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

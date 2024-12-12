@@ -12,6 +12,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { AddMatchComponent } from './add-match/add-match.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FooterComponent } from './footer/footer.component';
     MatchPageComponent,
     ProfilePageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AddMatchComponent
   ],
   imports: [
     BrowserModule,

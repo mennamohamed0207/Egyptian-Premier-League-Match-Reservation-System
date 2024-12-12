@@ -1,0 +1,62 @@
+<div class="add-match-container">
+    <div class="form-card">
+        <h2 class="form-title">Add New Match</h2>
+        <form [formGroup]="matchForm" (ngSubmit)="onSubmit()">
+            <!-- Team Selection -->
+            <div class="form-group">
+                <label for="homeTeam">Home Team:</label>
+                <select id="homeTeam" formControlName="homeTeam" required>
+                    <option *ngFor="let team of teams" [value]="team">{{ team }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="awayTeam">Away Team:</label>
+                <select id="awayTeam" formControlName="awayTeam" required>
+                    <option *ngFor="let team of teams" [value]="team">{{ team }}</option>
+                </select>
+            </div>
+
+            <!-- Venue -->
+            <div class="form-group">
+                <label for="venue">Match Venue:</label>
+                <select id="venue" formControlName="venue" required>
+                    <option *ngFor="let venue of venues" [value]="venue">{{ venue }}</option>
+                </select>
+            </div>
+
+            <!-- Date & Time -->
+            <div class="form-group">
+                <label for="matchDate">Match Date & Time:</label>
+                <input type="datetime-local" id="matchDate" formControlName="matchDate" required />
+            </div>
+
+            <!-- Officials -->
+            <div class="form-group">
+                <label for="mainReferee">Main Referee:</label>
+                <select id="mainReferee" formControlName="mainReferee" required>
+                    <option *ngFor="let referee of referees" [value]="referee">{{ referee }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="linesman1">Linesman 1:</label>
+                <select id="linesman1" formControlName="linesman1" required>
+                    <option *ngFor="let linesman of linesmen" [value]="linesman">{{ linesman }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="linesman2">Linesman 2:</label>
+                <select id="linesman2" formControlName="linesman2" required>
+                    <option *ngFor="let linesman of linesmen" [value]="linesman">{{ linesman }}</option>
+                </select>
+            </div>
+
+            <!-- Actions -->
+            <div class="form-actions">
+                <button type="submit" [disabled]="!matchForm.valid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

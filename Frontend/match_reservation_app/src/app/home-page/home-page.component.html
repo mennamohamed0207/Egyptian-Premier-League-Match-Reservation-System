@@ -10,7 +10,7 @@
 <!-- Conditional Buttons for Manager or Site Admin -->
 <div *ngIf="userType === 'manager' || userType === 'site_admin'" class="manager-buttons">
     <button class="fancy-button" (click)="onManageMatches()">Manage Matches</button>
-    <button class="fancy-button" (click)="onViewReports()">View Reports</button>
+    <button class="fancy-button" (click)="onViewReports()">Manage Stadiums</button>
 </div>
 <div class="grid">
 <app-match-card *ngFor="let match of matches" [match]="match"></app-match-card>

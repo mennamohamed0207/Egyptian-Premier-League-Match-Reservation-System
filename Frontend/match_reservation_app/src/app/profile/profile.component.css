@@ -2,15 +2,21 @@
 .profile-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     /* align-items: center; */
     padding: 30px 40px;
-    background-color: #dfe787;
-    /* Mindaro */
+    background-image: url('../../../public/background.jpeg');
+    /* Add image URL here */
+    background-size: cover;
+    background-position: center;
     border-radius: 16px;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    color: white;
+    /* White text over the image */
+    backdrop-filter: blur(5px);
+    /* Adds a blur effect for readability */
 }
 
 /* Profile Header */
@@ -34,7 +40,7 @@
 .user-name {
     font-size: 2rem;
     font-weight: 700;
-    color: #132a13;
+    color: white;
     /* Dark Green */
     margin-bottom: 5px;
 }
@@ -50,7 +56,7 @@
 /* Edit Profile Button */
 .edit-button {
     padding: 10px 25px;
-    background-color: #4f772d;
+    background-color: #7fa35f;
     /* Fern Green */
     color: white;
     border: none;

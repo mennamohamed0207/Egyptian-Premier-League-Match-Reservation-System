@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AddMatchComponent } from './add-match/add-match.component';
 import { AddStadiumComponent } from './add-stadium/add-stadium.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { AddStadiumComponent } from './add-stadium/add-stadium.component';
     HeaderComponent,
     FooterComponent,
     AddMatchComponent,
-    AddStadiumComponent
+    AddStadiumComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

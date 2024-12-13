@@ -1,6 +1,6 @@
 <div class="profile-container">
     <div class="profile-header">
-        <img src="assets/profile-placeholder.png" alt="User Profile Picture" class="profile-picture" />
+        <!-- <img src="default.jpeg" alt="User Profile Picture" class="profile-picture" /> -->
         <h2 class="user-name">{{ profileForm.value.firstName }} {{ profileForm.value.lastName }}</h2>
         <p class="user-role">{{ profileForm.value.role }}</p>
         <button (click)="editMode = !editMode" class="edit-button">
@@ -8,7 +8,7 @@
         </button>
     </div>
 
-    <div class="profile-details">
+    <div class="profile-content">
         <!-- Personal Information -->
         <div class="details-card">
             <h3>Personal Information</h3>
@@ -38,11 +38,7 @@
                     </select>
                 </li>
             </ul>
-        </div>
 
-        <!-- Address Details -->
-        <div class="details-card">
-            <h3>Address Details</h3>
             <ul>
                 <li *ngIf="!editMode">
                     <strong>City:</strong> {{ profileForm.value.city || 'N/A' }}

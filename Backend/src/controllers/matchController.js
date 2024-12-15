@@ -482,6 +482,68 @@ router.get('/:matchId', async (req, res) => {
         res.status(500).send({ message: 'Error fetching match' });
     }
 });
+/**
+ * @swagger
+ * /match/{matchId}/seats/:
+ *   get:
+ *     summary: Get seats of a match by ID
+ *     description: Retrieves the seats of a match by its ID.
+ *     operationId: getMatchSeatsById
+ *     tags:
+ *       - Match
+ *     parameters:
+ *       - name: matchId
+ *         in: path
+ *         required: true
+ *         description: The ID of the match to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Seats retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 seats:
+ *                   type: array
+ *                   items:
+ *                     type: array
+ *                     items:
+ *                       type: integer
+ *                       enum: [0, 1]
+ *                   example:
+ *                     - [0, 1, 0, 1]
+ *                     - [1, 0, 0, 1]
+ *       '404':
+ *         description: Match not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Match not found"
+ *       '500':
+ *         description: Error fetching match
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error fetching match"
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ */
+
 router.get('/:matchId/seats', async (req, res) => {
     const { matchId } = req.params;
     try {

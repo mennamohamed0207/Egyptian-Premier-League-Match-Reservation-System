@@ -21,6 +21,12 @@ import { AddStadiumComponent } from './add-stadium/add-stadium.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { CancelReservationDialogComponent } from './cancel-reservation-dialog/cancel-reservation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button'; // For buttons
+import { MatIconModule } from '@angular/material/icon';     // For icons (if needed)
 
 @NgModule({
   declarations: [
@@ -37,6 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     AddStadiumComponent,
     ProfileComponent,
     AdminComponent,
+    CancelReservationDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -44,8 +52,13 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
   ],
-  providers: [provideClientHydration(withEventReplay())],
+  providers: [provideClientHydration(withEventReplay()), provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

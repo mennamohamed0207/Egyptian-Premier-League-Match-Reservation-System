@@ -173,3 +173,66 @@
     background-color: #132a13;
     /* Dark Green */
 }
+
+.reservations-section {
+    /* margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.reservation-card {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-info h4 {
+    margin: 0;
+    color: #333;
+}
+.reservation-card p {
+    margin: 0;
+    color: #555;
+}
+.reservations-section h3 {
+    margin: 10px;
+    align-items: center;
+    color: #31572c;
+    /* Hunter Green */
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.cancel-button {
+    background-color: #ff4d4f;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #d9363e;
+}
+
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

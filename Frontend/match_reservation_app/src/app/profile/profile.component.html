@@ -64,4 +64,35 @@
         <button (click)="onSubmit()" [disabled]="!profileForm.valid">Save Changes</button>
         <button (click)="resetForm()">Cancel</button>
     </div>
+    <!-- Reservations Section -->
+    <div class="reservations-section">
+        <h3>Your Reservations</h3>
+        <div *ngIf="reservations.length > 0; else noReservations">
+            <div class="reservation-card" *ngFor="let reservation of reservations">
+                <div class="reservation-info">
+                    <h4>{{ reservation.eventName }}</h4>
+                    <p>
+                        <strong>Date:</strong> {{ reservation.eventDate | date }}
+                    </p>
+                    <p>
+                        <strong>Seats:</strong> {{ reservation.seats.join(', ') }}
+                    </p>
+                    <p>
+                        <strong>Status:</strong>
+                        <span *ngIf="canCancel(reservation.eventDate)">Cancellable</span>
+                        <span *ngIf="!canCancel(reservation.eventDate)">Non-Cancellable</span>
+                    </p>
+                </div>
+                <button 
+                *ngIf="canCancel(reservation.eventDate)" 
+                (click)="cancelReservation(reservation.id, reservation)" 
+                class="cancel-button">
+                Cancel Reservation
+            </button>
+            </div>
+        </div>
+        <ng-template #noReservations>
+            <p>No reservations found.</p>
+        </ng-template>
+    </div>
 </div>

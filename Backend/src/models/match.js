@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const uri = process.env.MONGO_URI;
-
+const Stadium = require('./stadium');
 const matchSchema = new mongoose.Schema({
     homeTeam: { type: String, required: true },
     awayTeam: { type: String, required: true },
@@ -26,7 +26,7 @@ async function run() {
     await mongoose.connect(uri);
     console.log("Match Model Connected to MongoDB successfully!");
   }
-  run();
+run();
 
 module.exports = mongoose.model('Match', matchSchema);
 

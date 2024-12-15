@@ -220,7 +220,7 @@
 }
 
 .cancel-button {
-    background-color: #ff4d4f;
+    background-color: #90a955ff;
     color: #fff;
     border: none;
     padding: 8px 12px;
@@ -230,7 +230,7 @@
 }
 
 .cancel-button:hover {
-    background-color: #d9363e;
+    background-color: #90a955ff;
 }
 
 *{

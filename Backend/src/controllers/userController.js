@@ -41,12 +41,18 @@ const router = express.Router();
  *                 format: date
  *               gender:
  *                 type: string
+ *                 enum:
+ *                  - Female
+ *                  - Male
  *               city:
  *                 type: string
  *               address:
  *                 type: string
  *               role:
  *                 type: string
+ *                 enum:
+ *                  - Manager
+ *                  - User
  *     responses:
  *       201:
  *         description: Successful signup
@@ -57,7 +63,10 @@ router.post('/signup', async (req, res) => {
     try {
         const { username, password, email, firstname, lastname, birthdate, gender, city, address, role } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-        let status=null
+        if (role == 'Admin') {
+            res.status(403).json({ error: "You can't sign up as admin" });
+        }
+        let status='Not Approved'
         if (role == 'Manager') {
             status = 'Pending'
         }
@@ -189,6 +198,9 @@ router.get('/:username', verifyToken, async (req, res) => {
  *                 format: date
  *               gender:
  *                 type: string
+ *                 enum:
+ *                  - Female
+ *                  - Male
  *               city:
  *                 type: string
  *               address:

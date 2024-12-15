@@ -1,0 +1,42 @@
+.admin-dashboard {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-image: url("../../../public/empty.jpg");
+  background-size: cover;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #132a13ff;
+}
+
+section {
+  margin-top: 1%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 7%;
+  background-color: rgba(236, 243, 158, 0.6);
+  padding: 15px;
+  border-radius: 1%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  color: 132a13ff;
+}
+
+thead {
+  background-color: rgba(236, 243, 158, 0.7);
+  border-radius: 50px;
+}

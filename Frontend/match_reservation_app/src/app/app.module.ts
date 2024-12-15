@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AddMatchComponent } from './add-match/add-match.component';
 import { AddStadiumComponent } from './add-stadium/add-stadium.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ProfileComponent } from './profile/profile.component';
     FooterComponent,
     AddMatchComponent,
     AddStadiumComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

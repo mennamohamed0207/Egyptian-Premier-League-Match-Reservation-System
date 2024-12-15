@@ -5,11 +5,19 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const verifyToken = require('../middlewares/auth');
 const router = express.Router();
+/**
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: User management APIs
+ */
 
 /**
  * @swagger
  * /user/signup:
  *   post:
+ *     tags:
+ *       - User
  *     summary: User can signup as a customer
  *     requestBody:
  *       required: true
@@ -61,6 +69,8 @@ router.post('/signup', async (req, res) => {
  * @swagger
  * /user/login:
  *   post:
+ *     tags:
+ *       - User
  *     summary: User can login
  *     requestBody:
  *       required: true
@@ -104,6 +114,8 @@ router.post('/login', async (req, res) => {
  * @swagger
  * /user/{username}:
  *   get:
+ *     tags:
+ *       - User
  *     summary: User can get his info by username
  *     security:
  *       - JWT: [] 
@@ -145,6 +157,8 @@ router.get('/:username', verifyToken, async (req, res) => {
  * @swagger
  * /user/{username}/edit/:
  *   put:
+ *     tags:
+ *       - User
  *     summary: User can edit his info by username
  *     security:
  *       - JWT: []  
@@ -215,6 +229,8 @@ router.put('/:username/edit', verifyToken, async (req, res) => {
  * @swagger
  * /user/{username}/change-password:
  *   put:
+ *     tags:
+ *       - User
  *     summary: User can change password
  *     security:
  *       - JWT: []  
@@ -278,6 +294,8 @@ router.put('/:username/change-password',verifyToken,async (req,res)=>{
  * @swagger
  * /user/{username}/users/:
  *   get:
+ *     tags:
+ *       - User
  *     summary: Admin can get all users 
  *     security:
  *       - JWT: []  
@@ -322,6 +340,8 @@ router.get('/:username/users', verifyToken, async (req, res) => {
  * @swagger
  * /user/{username}/:
  *   put:
+ *     tags:
+ *       - User
  *     summary: Admin can approve user authority by username
  *     security:
  *       - JWT: []  
@@ -396,6 +416,8 @@ router.put('/:username', verifyToken, async (req, res) => {
  * @swagger
  * /user/{username}/:
  *   delete:
+ *     tags:
+ *       - User
  *     summary: Admin can delete user by username
  *     security:
  *       - JWT: []  

@@ -57,7 +57,11 @@ router.post('/signup', async (req, res) => {
     try {
         const { username, password, email, firstname, lastname, birthdate, gender, city, address, role } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ username, password: hashedPassword, email, firstname, lastname, birthdate, gender, city, address, role });
+        let status=null
+        if (role == 'Manager') {
+            status = 'Pending'
+        }
+        const user = new User({ username, password: hashedPassword, email, firstname, lastname, birthdate, gender, city, address, status });
         await user.save();
         res.status(201).json({ message: 'User signed up successfully' });
     } catch (error) {

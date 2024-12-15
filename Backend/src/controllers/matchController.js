@@ -221,10 +221,9 @@ router.get('/', async (req, res) => {
  *                   example: "Error creating match"
  */
 router.post('/',verifyToken, async (req, res) => {
+    const matchData = req.body;
+    const userID = req.userID;
     try {
-        const matchData = req.body;
-        const userID = req.userID;
-
         const manager = await User.findById(userID);
         if(manager.role != 'Manager'){
             return res.status(403).json({ error: "You are not authorized to add a match" });
@@ -237,6 +236,29 @@ router.post('/',verifyToken, async (req, res) => {
     } catch (error) {
         console.error('Error creating match:', error);
         res.status(500).json({ message: 'Error creating match', error });
+    }
+})
+
+router.put('/:matchId', verifyToken, async (req, res) => {
+    const { matchId } = req.params;
+    const updateData = req.body;
+    const userID = req.userID;
+    try {
+        const manager = await User.findById(userID);
+        if(manager.role != 'Manager'){
+            return res.status(403).json({ error: "You are not authorized to add a match" });
+        }
+
+        const updatedMatch = await Match.findByIdAndUpdate(matchId, updateData, { new: true });
+
+        if (updatedMatch) {
+            res.json(updatedMatch);
+        } else {
+            res.status(404).send({ message: 'Match not found' });
+        }
+    } catch (err) {
+        console.error('Error updating match:', err);
+        res.status(500).send({ message: 'Error updating match' });
     }
 })
 // rawan_manager, securePassword123 , eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NzVmMjMwYzAzZmFlNzBlNDMxZjc2MjYiLCJpYXQiOjE3MzQyODgyOTAsImV4cCI6MTczNDM3NDY5MH0.AY1Hhs0vQYzOK9hxa8gXmVlysog9oBIr1dBJlSzs28w

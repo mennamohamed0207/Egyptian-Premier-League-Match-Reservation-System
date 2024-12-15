@@ -1,15 +1,40 @@
 #login .container #login-row #login-column #login-box {
   margin-top: 120px;
-  max-width: 400px;
-  height: 320px;
-  border: 1px solid #9C9C9C;
-  background-color: #EAEAEA;
-  border-radius: 20px;
+  margin-bottom: 120px;
 
+  border: 1px solid #9C9C9C;
+  background-color: rgba(236, 243, 158, 0.6);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
 }
-#login .container #login-row #login-column #login-box #login-form {
-  padding: 20px;
+
+#login-form div {
+  margin: 15px 0;
 }
-#login .container #login-row #login-column #login-box #login-form #register-link {
-  margin-top: -85px;
+
+#login-form #register-link {
+  margin-top: 20px;
+}
+
+.btn-info {
+  width: 50%;
+}
+
+#login-button {
+  display: flex;
+  justify-content: center;
+}
+#login {
+  background-image: url("../../../public/empty2.jpg");
+  background-size: cover;
+}
+
+.text-color{
+  color : #31572cff;
+}
+
+.checkbox{
+  margin: 5px;
 }

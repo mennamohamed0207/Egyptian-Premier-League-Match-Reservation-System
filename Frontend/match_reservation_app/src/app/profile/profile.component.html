@@ -1,0 +1,67 @@
+<div class="profile-container">
+    <div class="profile-header">
+        <!-- <img src="default.jpeg" alt="User Profile Picture" class="profile-picture" /> -->
+        <h2 class="user-name">{{ profileForm.value.firstName }} {{ profileForm.value.lastName }}</h2>
+        <p class="user-role">{{ profileForm.value.role }}</p>
+        <button (click)="editMode = !editMode" class="edit-button">
+            {{ editMode ? 'Cancel' : 'Edit Profile' }}
+        </button>
+    </div>
+
+    <div class="profile-content">
+        <!-- Personal Information -->
+        <div class="details-card">
+            <h3>Personal Information</h3>
+            <ul>
+                <li>
+                    <strong>Username:</strong> {{ profileForm.value.username }}
+                </li>
+                <li>
+                    <strong>Email:</strong> {{ profileForm.value.email }}
+                </li>
+                <li *ngIf="!editMode">
+                    <strong>Birth Date:</strong> {{ profileForm.value.birthDate | date }}
+                </li>
+                <li *ngIf="editMode">
+                    <label for="birthDate">Birth Date:</label>
+                    <input type="date" id="birthDate" formControlName="birthDate" />
+                </li>
+                <li *ngIf="!editMode">
+                    <strong>Gender:</strong> {{ profileForm.value.gender }}
+                </li>
+                <li *ngIf="editMode">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" formControlName="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </li>
+            </ul>
+
+            <ul>
+                <li *ngIf="!editMode">
+                    <strong>City:</strong> {{ profileForm.value.city || 'N/A' }}
+                </li>
+                <li *ngIf="editMode">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" formControlName="city" placeholder="Enter your city" />
+                </li>
+                <li *ngIf="!editMode">
+                    <strong>Address:</strong> {{ profileForm.value.address || 'N/A' }}
+                </li>
+                <li *ngIf="editMode">
+                    <label for="address">Address:</label>
+                    <textarea id="address" formControlName="address" rows="2"
+                        placeholder="Enter your address"></textarea>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Save and Cancel Buttons -->
+    <div class="profile-actions" *ngIf="editMode">
+        <button (click)="onSubmit()" [disabled]="!profileForm.valid">Save Changes</button>
+        <button (click)="resetForm()">Cancel</button>
+    </div>
+</div>

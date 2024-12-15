@@ -12,6 +12,9 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { AddMatchComponent } from './add-match/add-match.component';
+import { AddStadiumComponent } from './add-stadium/add-stadium.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import { FooterComponent } from './footer/footer.component';
     MatchPageComponent,
     ProfilePageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AddMatchComponent,
+    AddStadiumComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

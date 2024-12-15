@@ -86,15 +86,6 @@
   align-items: center;
 }
 
-.purchase-btn {
-  color: #132a13ff;
-  background-color: #ecf39eff;
-}
-
-.purchase-btn:hover {
-  background-color: #132a13ff;
-  color: #ecf39eff;
-}
 
 .purchase-button {
   padding-bottom: 30px;

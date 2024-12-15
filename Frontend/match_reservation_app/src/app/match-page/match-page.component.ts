@@ -6,7 +6,8 @@ import { chdir } from 'node:process';
   standalone: false,
 
   templateUrl: './match-page.component.html',
-  styleUrl: './match-page.component.css',
+  styleUrls: ['./match-page.component.css','../app.component.css'],
+  
 })
 export class MatchPageComponent {
   rows: number = 3;

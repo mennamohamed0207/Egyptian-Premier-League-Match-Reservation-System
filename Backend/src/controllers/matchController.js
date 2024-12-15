@@ -384,14 +384,96 @@ router.put('/:matchId', verifyToken, async (req, res) => {
         res.status(500).send({ message: 'Error updating match' });
     }
 })
+/**
+ * @swagger
+ * /match/{matchId}:
+ *   get:
+ *     summary: Get a match by ID with stadium details
+ *     description: Retrieves a match by its ID, along with stadium details (name, length, and width).
+ *     operationId: getMatchById
+ *     tags:
+ *       - Match
+ *     parameters:
+ *       - name: matchId
+ *         in: path
+ *         required: true
+ *         description: The ID of the match to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Match found successfully, including stadium details.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 homeTeam:
+ *                   type: string
+ *                   example: "Team A"
+ *                 awayTeam:
+ *                   type: string
+ *                   example: "Team B"
+ *                 stadiumID:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                       example: "Cairo Stadium"
+ *                     length:
+ *                       type: integer
+ *                       example: 40
+ *                     width:
+ *                       type: integer
+ *                       example: 20
+ *                 dateTime:
+ *                   type: string
+ *                   format: date-time
+ *                   example: "2024-12-15T16:00:00Z"
+ *                 mainReferee:
+ *                   type: string
+ *                   example: "Referee Name"
+ *                 linesman1:
+ *                   type: string
+ *                   example: "Linesman 1"
+ *                 linesman2:
+ *                   type: string
+ *                   example: "Linesman 2"
+ *       '404':
+ *         description: Match not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Match not found"
+ *       '500':
+ *         description: Error fetching match
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error fetching match"
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ */
 router.get('/:matchId', async (req, res) => {
     const { matchId } = req.params;
     try {
         const match = await Match.findById(matchId)
-            .populate('stadiumID', 'name length width');  // Populate the stadium details
+            .populate('stadiumID', 'name length width');
 
         if (match) {
-            res.json(match);  // Return match and populated stadium data
+            res.json(match);
         } else {
             res.status(404).send({ message: 'Match not found' });
         }

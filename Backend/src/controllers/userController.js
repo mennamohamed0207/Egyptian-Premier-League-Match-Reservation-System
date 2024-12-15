@@ -382,6 +382,7 @@ router.get('/:username/users', verifyToken, async (req, res) => {
  *                 enum:
  *                  - Pending
  *                  - Approved
+ *                  - Not Approved
  *     responses:
  *       200:
  *         description: Successful edit
@@ -407,14 +408,21 @@ router.put('/:username', verifyToken, async (req, res) => {
         if(admin.role!=='Admin'){
             return res.status(403).json({ error: "You are not admin" });
         }
-
         const {customerUsername ,status } = req.body;
+        const checkUser = await User.findOne({ 'username': customerUsername });
+        if (checkUser.role === 'Admin') {
+            return res.status(403).json({ error: "You can't approve admin" });
+        }
         if (!status) {
             return res.status(400).json({ error: "Status required" });
         }
+        
         let role = 'User'
         if (status === 'Approved') {
             role = 'Manager'
+        }
+        else if (status === 'Not Approved') {
+            role = 'User'
         }
         const update = { status, role };
         const user = await User.findOneAndUpdate({ 'username': customerUsername }, update, { new: true })

@@ -5,6 +5,86 @@ const Match = require('../models/match');
 const User = require('../models/user');
 const verifyToken = require('../middlewares/auth');
 
+/**
+ * @swagger
+ * /match:
+ *   get:
+ *     tags:
+ *       - Match
+ *     summary: Get all matches
+ *     description: Fetches all matches from the database. If no matches are found, a 404 status is returned.
+ *     responses:
+ *       200:
+ *         description: A list of matches
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: Unique identifier for the match
+ *                     example: "675472033f2f9fdb65ed1f53"
+ *                   homeTeam:
+ *                     type: string
+ *                     description: Name of the home team
+ *                     example: "Team A"
+ *                   awayTeam:
+ *                     type: string
+ *                     description: Name of the away team
+ *                     example: "Team B"
+ *                   stadiumID:
+ *                     type: string
+ *                     description: Identifier for the stadium
+ *                     example: "60dabc1234567890abcdef12"
+ *                   seats:
+ *                     type: array
+ *                     description: 2D array representing the seating arrangement
+ *                     items:
+ *                       type: array
+ *                       items:
+ *                         type: number
+ *                         example: 0
+ *                   dateTime:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The date and time of the match
+ *                     example: "2024-12-07T17:00:00.000+00:00"
+ *                   mainReferee:
+ *                     type: string
+ *                     description: Name of the main referee
+ *                     example: "Referee John Doe"
+ *                   linesman1:
+ *                     type: string
+ *                     description: Name of the first linesman
+ *                     example: "Linesman Jane Doe"
+ *                   linesman2:
+ *                     type: string
+ *                     description: Name of the second linesman
+ *                     example: "Linesman Tom Smith"
+ *       404:
+ *         description: No matches found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: No matches found
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error fetching matches
+ */
 router.get('/', async (req, res) => {
     try {
         const matches = await Match.find();
@@ -160,5 +240,5 @@ router.post('/',verifyToken, async (req, res) => {
     }
 })
 // rawan_manager, securePassword123 , eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NzVmMjMwYzAzZmFlNzBlNDMxZjc2MjYiLCJpYXQiOjE3MzQyODgyOTAsImV4cCI6MTczNDM3NDY5MH0.AY1Hhs0vQYzOK9hxa8gXmVlysog9oBIr1dBJlSzs28w
-// rawan, rawan123, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NzVmMTEyM2QyNDRhNmNjMjY4YzYwNzgiLCJpYXQiOjE3MzQyODM2MDEsImV4cCI6MTczNDM3MDAwMX0.AIn0VxE3zO0q-kCnSZM6qdSb6UWbZsIsJMCYmeooB3A
+// rawan, rawan123, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NzVmMTEyM2QyNDRhNmNjMjY4YzYwNzgiLCJpYXQiOjE3MzQyODkyMDAsImV4cCI6MTczNDM3NTYwMH0.G0RG70Kn8mwA67b86UkS1ZA8LMNevRI-zLm0BNCpl3M
 module.exports = router;

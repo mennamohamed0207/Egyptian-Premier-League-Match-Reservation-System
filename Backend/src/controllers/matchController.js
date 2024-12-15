@@ -226,7 +226,7 @@ router.post('/',verifyToken, async (req, res) => {
     try {
         const manager = await User.findById(userID);
         if(manager.role != 'Manager'){
-            return res.status(403).json({ error: "You are not authorized to add a match" });
+            return res.status(403).json({ error: "Access denied: Managers only" });
         }
 
         const match = new Match(matchData);
@@ -238,7 +238,130 @@ router.post('/',verifyToken, async (req, res) => {
         res.status(500).json({ message: 'Error creating match', error });
     }
 })
-
+/**
+ * @swagger
+ * /match/{matchId}:
+ *   put:
+ *     tags:
+ *       - Match
+ *     summary: Update a match by ID
+ *     description: Updates the specified fields of a match by ID. Access is restricted to managers only.
+ *     parameters:
+ *       - in: path
+ *         name: matchId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the match to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               homeTeam:
+ *                 type: string
+ *                 description: Name of the home team
+ *               awayTeam:
+ *                 type: string
+ *                 description: Name of the away team
+ *               stadiumID:
+ *                 type: string
+ *                 description: Identifier for the stadium
+ *               seats:
+ *                 type: array
+ *                 description: 2D array representing the seating arrangement
+ *                 items:
+ *                   type: array
+ *                   items:
+ *                     type: number
+ *               dateTime:
+ *                 type: string
+ *                 format: date-time
+ *                 description: The date and time of the match
+ *               mainReferee:
+ *                 type: string
+ *                 description: Name of the main referee
+ *               linesman1:
+ *                 type: string
+ *                 description: Name of the first linesman
+ *               linesman2:
+ *                 type: string
+ *                 description: Name of the second linesman
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: The updated match
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   example: "60dabc1234567890abcdef12"
+ *                 homeTeam:
+ *                   type: string
+ *                   example: "ahly"
+ *                 awayTeam:
+ *                   type: string
+ *                   example: "zamalek"
+ *                 stadiumID:
+ *                   type: string
+ *                   example: "60dabc1234567890abcdef12"
+ *                 seats:
+ *                   type: array
+ *                   items:
+ *                     type: array
+ *                     items:
+ *                       type: integer
+ *                   example: [[0, 1, 0], [0, 1, 0], [1, 0, 1]]
+ *                 dateTime:
+ *                   type: string
+ *                   format: date-time
+ *                   example: "2024-12-07T17:00:00Z"
+ *                 mainReferee:
+ *                   type: string
+ *                   example: "Referee John Doe"
+ *                 linesman1:
+ *                   type: string
+ *                   example: "Linesman Jane Doe"
+ *                 linesman2:
+ *                   type: string
+ *                   example: "Linesman Tom Smith"
+ *       403:
+ *         description: Forbidden (Managers only)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Access denied: Managers only"
+ *       404:
+ *         description: Match not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Match not found"
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error updating match"
+ */
 router.put('/:matchId', verifyToken, async (req, res) => {
     const { matchId } = req.params;
     const updateData = req.body;
@@ -246,7 +369,7 @@ router.put('/:matchId', verifyToken, async (req, res) => {
     try {
         const manager = await User.findById(userID);
         if(manager.role != 'Manager'){
-            return res.status(403).json({ error: "You are not authorized to add a match" });
+            return res.status(403).json({ error: "Access denied: Managers only" });
         }
 
         const updatedMatch = await Match.findByIdAndUpdate(matchId, updateData, { new: true });

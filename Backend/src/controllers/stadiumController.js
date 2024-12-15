@@ -4,7 +4,90 @@ const router = express.Router();
 const User = require('../models/user');
 const verifyToken = require('../middlewares/auth');
 const Stadium = require('../models/stadium');
-
+/**
+ * @swagger
+ * /stadium:
+ *   post:
+ *     summary: Add a new stadium
+ *     description: Adds a new stadium to the system. Only users with the "Manager" role can add a stadium.
+ *     operationId: addStadium
+ *     tags:
+ *       - Stadium
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       description: The stadium information to be added.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "Cairo Stadium"
+ *               length:
+ *                 type: integer
+ *                 example: 40
+ *               width:
+ *                 type: integer
+ *                 example: 20
+ *             required:
+ *               - name
+ *               - length
+ *               - width
+ *     responses:
+ *       '201':
+ *         description: Stadium added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Stadium added successfully"
+ *                 stadium:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                       example: "Cairo Stadium"
+ *                     length:
+ *                       type: integer
+ *                       example: 40
+ *                     width:
+ *                       type: integer
+ *                       example: 20
+ *       '403':
+ *         description: Access denied for non-Managers
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Access denied: Managers only"
+ *       '500':
+ *         description: Error adding stadium
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error adding stadium"
+ *                 error:
+ *                   type: string
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ */
 router.post('/',verifyToken, async (req, res) => {
     const stadiumData = req.body;
     const userID = req.userID;

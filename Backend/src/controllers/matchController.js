@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Match = require('../models/match');
 const User = require('../models/user');
+const Stadium = require('../models/stadium');
 const verifyToken = require('../middlewares/auth');
 
 /**
@@ -220,24 +221,39 @@ router.get('/', async (req, res) => {
  *                   type: string
  *                   example: "Error creating match"
  */
-router.post('/',verifyToken, async (req, res) => {
-    const matchData = req.body;
-    const userID = req.userID;
+router.post('/', verifyToken, async (req, res) => {
+    const { homeTeam, awayTeam, stadiumID, dateTime, mainReferee, linesman1, linesman2 } = req.body;
+
     try {
-        const manager = await User.findById(userID);
-        if(manager.role != 'Manager'){
-            return res.status(403).json({ error: "Access denied: Managers only" });
+        const stadium = await Stadium.findById(stadiumID);
+        if (!stadium) {
+            return res.status(404).json({ error: 'Stadium not found' });
         }
 
-        const match = new Match(matchData);
-        await match.save();
+        const seats = Array.from({ length: stadium.length }, () =>
+            Array(stadium.width).fill(0)
+        );
 
-        res.status(201).json({ message: 'Match created successfully', match });
+        const match = new Match({
+            homeTeam,
+            awayTeam,
+            stadiumID,
+            dateTime,
+            mainReferee,
+            linesman1,
+            linesman2,
+            seats,
+        });
+
+        await match.save();
+        res.status(201).json(match);
     } catch (error) {
         console.error('Error creating match:', error);
-        res.status(500).json({ message: 'Error creating match', error });
+        res.status(400).json({ error: error.message });
     }
-})
+});
+
+
 /**
  * @swagger
  * /match/{matchId}:

@@ -7,12 +7,7 @@ const matchSchema = new mongoose.Schema({
     stadiumID: { type: mongoose.Schema.Types.ObjectId, ref: 'Stadium', required: true },
     seats: {
         type: [[Number]],
-        validate: {
-            validator: function(value) {
-                return value.every(row => row.every(seat => seat === 0 || seat === 1));
-            },
-            message: 'Seats array must only contain 0s (empty) and 1s (reserved).',
-        },
+        default: [] 
     },
     dateTime: { type: Date },
     mainReferee: { type: String, required: true },

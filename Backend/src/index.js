@@ -5,6 +5,7 @@ const swaggerSpec = require("../swagger");
 const authRoutes = require('./controllers/userController'); 
 const matchRoutes = require('./controllers/matchController'); 
 const stadiumRoutes = require('./controllers/stadiumController'); 
+const ticketRoutes = require('./controllers/ticketController'); 
 
 const cors = require("cors");
 
@@ -18,6 +19,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 app.use('/user', authRoutes);
 app.use('/match', matchRoutes);
 app.use('/stadium', stadiumRoutes);
+app.use('/ticket',ticketRoutes)
 
 connectToDatabase()
   .then(() => {

@@ -223,8 +223,13 @@ router.get('/', async (req, res) => {
  */
 router.post('/', verifyToken, async (req, res) => {
     const { homeTeam, awayTeam, stadiumID, dateTime, mainReferee, linesman1, linesman2 } = req.body;
+    const userID = req.userID;
 
     try {
+        const manager = await User.findById(userID);
+        if(manager.role != 'Manager'){
+            return res.status(403).json({ error: "Access denied: Managers only" });
+        }
         const stadium = await Stadium.findById(stadiumID);
         if (!stadium) {
             return res.status(404).json({ error: 'Stadium not found' });
@@ -249,7 +254,7 @@ router.post('/', verifyToken, async (req, res) => {
         res.status(201).json(match);
     } catch (error) {
         console.error('Error creating match:', error);
-        res.status(400).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 });
 

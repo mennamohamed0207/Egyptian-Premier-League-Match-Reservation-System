@@ -208,7 +208,7 @@ router.post('/:matchId', verifyToken, async (req, res) => {
 router.get('/', verifyToken, async (req, res) => {
     const userID = req.userID;
     try {
-        const tickets = await Ticket.find({"userID":userID,});
+        const tickets = await Ticket.find({"userID":userID});
         if (tickets.length > 0) {
             res.status(200).json(tickets);
         } else {
@@ -217,6 +217,29 @@ router.get('/', verifyToken, async (req, res) => {
 
     } catch (error) {
         console.error('Error fetching ticket:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.delete('/:ticketId', verifyToken, async (req, res) => {
+    const { ticketId } = req.params;
+    const userID = req.userID;
+
+    try {
+        const ticket = await Ticket.findById(ticketId);
+        if (!ticket) {
+            return res.status(404).send({ error: 'Ticket not found' });
+        }
+
+        if (ticket.userID.toString() !== userID) {
+            return res.status(403).json({ error: 'Unauthorized to delete this ticket' });
+        }
+
+        await Ticket.deleteOne({ _id: ticketId });
+
+        res.status(200).json({ message: 'Ticket deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting ticket:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

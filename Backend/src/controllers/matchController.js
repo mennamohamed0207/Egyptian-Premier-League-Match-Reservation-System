@@ -108,7 +108,14 @@ router.get('/', async (req, res) => {
  *     tags:
  *       - Match
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: JWT-Token
+ *         in: header
+ *         required: true
+ *         description: Bearer token for user authentication
+ *         schema:
+ *           type: string
  *     requestBody:
  *       description: Details of the match to be created.
  *       required: true
@@ -268,6 +275,12 @@ router.post('/', verifyToken, async (req, res) => {
  *     summary: Update a match by ID
  *     description: Updates the specified fields of a match by ID. Access is restricted to managers only.
  *     parameters:
+ *       - name: JWT-Token
+ *         in: header
+ *         required: true
+ *         description: Bearer token for user authentication
+ *         schema:
+ *           type: string
  *       - in: path
  *         name: matchId
  *         required: true

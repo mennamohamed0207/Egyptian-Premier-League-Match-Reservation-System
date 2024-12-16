@@ -15,6 +15,8 @@ const Ticket = require('../models/ticket')
  *     description: Allows a user to reserve a seat for a specific match. The seat must not already be reserved.
  *     tags: 
  *       - Ticket
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - name: matchId
  *         in: path
@@ -22,7 +24,7 @@ const Ticket = require('../models/ticket')
  *         description: ID of the match for which the ticket is being reserved
  *         schema:
  *           type: string
- *       - name: Authorization
+ *       - name: JWT-Token
  *         in: header
  *         required: true
  *         description: Bearer token for user authentication
@@ -133,7 +135,76 @@ router.post('/:matchId', verifyToken, async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
+/**
+ * @swagger
+ * /ticket:
+ *   get:
+ *     summary: Get all tickets for the authenticated user
+ *     description: Retrieves a list of tickets reserved by the authenticated user. Requires a valid token.
+ *     tags: 
+ *       - Ticket
+ *     parameters:
+ *       - name: JWT-Token
+ *         in: header
+ *         required: true
+ *         description: Bearer token for user authentication
+ *         schema:
+ *           type: string
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Tickets retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   matchID:
+ *                     type: string
+ *                     example: 64a2c6f734edf8456d3c5f89
+ *                   userID:
+ *                     type: string
+ *                     example: 64a2c7e834edf8456d3c5f90
+ *                   seatRowIndex:
+ *                     type: integer
+ *                     example: 1
+ *                   seatColumnIndex:
+ *                     type: integer
+ *                     example: 2
+ *       204:
+ *         description: No tickets found for the user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: No matches found
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Unauthorized
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Internal server error
+ */
 router.get('/', verifyToken, async (req, res) => {
     const userID = req.userID;
     try {

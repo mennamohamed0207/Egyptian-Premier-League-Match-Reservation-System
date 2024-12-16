@@ -13,6 +13,13 @@ const Stadium = require('../models/stadium');
  *     operationId: addStadium
  *     tags:
  *       - Stadium
+ *     parameters:
+ *       - name: JWT-Token
+ *         in: header
+ *         required: true
+ *         description: Bearer token for user authentication
+ *         schema:
+ *           type: string
  *     security:
  *       - bearerAuth: []
  *     requestBody:

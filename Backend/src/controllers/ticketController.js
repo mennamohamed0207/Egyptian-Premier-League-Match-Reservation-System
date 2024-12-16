@@ -221,6 +221,72 @@ router.get('/', verifyToken, async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /ticket/{ticketId}:
+ *   delete:
+ *     summary: Delete a ticket by ID
+ *     description: Deletes a specific ticket for the authenticated user based on the ticket ID. Requires a valid token.
+ *     tags: 
+ *       - Ticket
+ *     parameters:
+ *       - name: ticketId
+ *         in: path
+ *         required: true
+ *         description: ID of the ticket to be deleted
+ *         schema:
+ *           type: string
+ *           example: 64a2c7e834edf8456d3c5f90
+ *       - name: JWT-Token
+ *         in: header
+ *         required: true
+ *         description: Bearer token for user authentication
+ *         schema:
+ *           type: string
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Ticket deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Ticket deleted successfully
+ *       404:
+ *         description: Ticket not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Ticket not found
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Unauthorized to delete this ticket
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Internal server error
+ */
 router.delete('/:ticketId', verifyToken, async (req, res) => {
     const { ticketId } = req.params;
     const userID = req.userID;

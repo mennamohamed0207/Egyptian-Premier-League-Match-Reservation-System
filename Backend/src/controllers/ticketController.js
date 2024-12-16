@@ -133,4 +133,20 @@ router.post('/:matchId', verifyToken, async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+router.get('/', verifyToken, async (req, res) => {
+    const userID = req.userID;
+    try {
+        const tickets = await Ticket.find({"userID":userID,});
+        if (tickets.length > 0) {
+            res.status(200).json(tickets);
+        } else {
+            res.status(204).send({ message: 'No matches found' });
+        }
+
+    } catch (error) {
+        console.error('Error fetching ticket:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 module.exports = router;

@@ -65,7 +65,7 @@ const verifyToken = require('../middlewares/auth');
  *                     type: string
  *                     description: Name of the second linesman
  *                     example: "Linesman Tom Smith"
- *       404:
+ *       204:
  *         description: No matches found
  *         content:
  *           application/json:
@@ -91,9 +91,9 @@ router.get('/', async (req, res) => {
         const matches = await Match.find();
 
         if (matches.length > 0) {
-            res.json(matches);
+            res.status(200).json(matches);
         } else {
-            res.status(404).send({ message: 'No matches found' });
+            res.status(204).send({ message: 'No matches found' });
         }
     } catch (err) {
         console.error('Error fetching matches:', err);

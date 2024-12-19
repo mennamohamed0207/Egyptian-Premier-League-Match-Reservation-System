@@ -34,6 +34,7 @@ export class AuthService {
         console.log(token);
         if (token) {
           localStorage.setItem('accessToken', token);
+          localStorage.setItem('username', loginForm.value.username);
           this.tokenSubject.next(token);
         }
       })
@@ -58,6 +59,7 @@ export class AuthService {
 
   logOut(): void {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('username')
     this.tokenSubject.next(null);
     this._router.navigate(['/login'])
   }

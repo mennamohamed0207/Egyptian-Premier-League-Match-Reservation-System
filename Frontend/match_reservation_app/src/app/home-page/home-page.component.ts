@@ -1,50 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatchService } from '../services/match.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
+  standalone:false,
   selector: 'app-home-page',
-  standalone: false,
-
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css'
+  styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent {
-  constructor(private matchService: MatchService, private route: ActivatedRoute) { }
+export class HomePageComponent implements OnInit {
+  matches: any[] = [];
+  userType: 'fan' | 'manager' | 'site_admin' = 'fan'; // Default user type
+  token: string | null = null;
+  username: string | null = null;
   private subscription: Subscription | undefined;
 
-  loadData(): void {
-    this.subscription = this.matchService.getMatches().subscribe(
-      (data) => {
-        this.matches = data;
-        console.log
-          (this.matches);
-      }
-    );
-  }
-  ngOnInit() {
-    this.route.params.subscribe(params => {
+  constructor(
+    private matchService: MatchService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe(() => {
       this.loadData();
     });
-  }
-  matches = [];
-  // Define the user type variable
-  userType: 'fan' | 'manager' | 'site_admin' = 'manager';
 
-  // Example method to set userType
-  setUserType(type: 'fan' | 'manager' | 'site_admin') {
-    this.userType = type;
+      // Check if running in the browser
+  if (typeof window !== 'undefined') {
+    this.token = localStorage.getItem('accessToken');
+    this.username = localStorage.getItem('username'); // Assume username is also stored
   }
-  getUserType(): any {
-    return this.userType;
   }
-  onManageMatches() {
+
+  loadData(): void {
+    this.subscription = this.matchService.getMatches().subscribe((data) => {
+      this.matches = data;
+      console.log(this.matches);
+    });
+  }
+
+  // Logout method
+  onLogout(): void {
+    // Clear token and username
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('username');
+    this.token = null;
+    this.username = null;
+
+    // Redirect to home or login page
+    this.router.navigate(['/login']);
+  }
+
+  onManageMatches(): void {
     console.log('Navigating to manage matches...');
     // Implement navigation or action
   }
 
-  onViewReports() {
+  onViewReports(): void {
     console.log('Viewing reports...');
     // Implement navigation or action
   }

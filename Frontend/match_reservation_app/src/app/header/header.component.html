@@ -1,9 +1,21 @@
 <nav class="navbar">
     <div class="logo">E7GZLY</div>
     <ul>
-        <li><a routerLink="/profile">Profile</a></li>
-        <li><a routerLink="/match">Matches</a></li>
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/signup">Register</a></li>
+        <!-- Conditional Header Buttons -->
+        <div class="user-actions">
+            <ng-container *ngIf="!token; else loggedIn">
+                <li><a routerLink="/login">Login</a></li>
+                <li><a routerLink="/signup">Register</a></li>
+            </ng-container>
+            <!-- Show Username/Logout if token is present -->
+            <ng-template #loggedIn>
+                <div class="user-actions">
+                    <li><a class="username">Welcome, {{ username }}</a></li>
+                    <li><a routerLink="/profile">Profile</a></li>
+                    <button (click)="onLogout()">Logout</button>
+                </div>
+
+            </ng-template>
+        </div>
     </ul>
 </nav>

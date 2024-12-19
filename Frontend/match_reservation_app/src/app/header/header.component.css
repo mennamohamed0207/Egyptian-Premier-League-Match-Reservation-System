@@ -25,3 +25,11 @@
     text-decoration: none;
     color: #4f772dff;
 }
+.navbar ul li a:hover {
+    color: #31572cff;
+}
+.username {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

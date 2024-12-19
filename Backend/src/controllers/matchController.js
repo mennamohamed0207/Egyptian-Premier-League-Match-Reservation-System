@@ -88,10 +88,27 @@ const verifyToken = require('../middlewares/auth');
  */
 router.get('/', async (req, res) => {
     try {
-        const matches = await Match.find();
-
+        const matches = await Match.find().populate('stadiumID');
+        
         if (matches.length > 0) {
-            res.status(200).json(matches);
+            const transformedMatches = matches.map(match => {
+                const stadium = match.stadiumID || {};
+                return {
+                    _id: match._id,
+                    homeTeam: match.homeTeam,
+                    awayTeam: match.awayTeam,
+                    stadiumID: stadium._id || null,
+                    stadiumName: stadium.name || 'Unknown',
+                    stadiumLength: stadium.length || 'Unknown',
+                    stadiumWidth: stadium.width || 'Unknown',
+                    seats: match.seats,
+                    dateTime: match.dateTime,
+                    mainReferee: match.mainReferee,
+                    linesman1: match.linesman1,
+                    linesman2: match.linesman2,
+                };
+            });
+            res.status(200).json(transformedMatches);
         } else {
             res.status(204).send({ message: 'No matches found' });
         }

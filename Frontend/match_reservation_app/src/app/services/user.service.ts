@@ -24,4 +24,13 @@ export class UserService {
       passwordData
     );
   }
+  signup(user: any): Observable<any> {
+    console.log(user);
+    
+    return this.http.post(`http://localhost:3000/user/signup`, user);
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/logout`, {});
+  }
 }

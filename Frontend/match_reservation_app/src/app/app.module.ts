@@ -20,7 +20,7 @@ import { AddMatchComponent } from './add-match/add-match.component';
 import { AddStadiumComponent } from './add-stadium/add-stadium.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CancelReservationDialogComponent } from './cancel-reservation-dialog/cancel-reservation-dialog.component';
@@ -57,8 +57,9 @@ import { MatIconModule } from '@angular/material/icon';     // For icons (if nee
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
+       
   ],
-  providers: [provideClientHydration(withEventReplay()), provideAnimationsAsync()],
+  providers: [provideClientHydration(withEventReplay()), provideAnimationsAsync(),provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -9,6 +9,7 @@ import { AddMatchComponent } from './add-match/add-match.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddStadiumComponent } from './add-stadium/add-stadium.component';
 import { AdminComponent } from './admin/admin.component';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'match',
-    component: MatchPageComponent,
+    component: MatchPageComponent
   },
   {
     path: 'signup',
@@ -35,6 +36,7 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'add-match',

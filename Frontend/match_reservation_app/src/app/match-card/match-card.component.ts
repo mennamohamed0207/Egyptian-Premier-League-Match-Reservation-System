@@ -12,10 +12,9 @@ export class MatchCardComponent {
     id: string;
     homeTeam: string;
     awayTeam: string;
-    date: string;
-    time: string;
+    dateTime: string;
     stadium: string;
-    stadiumImage: string;
+    mainReferee: string;
   };
 
   bookTicket(matchId: string) {

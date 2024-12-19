@@ -70,6 +70,9 @@ router.post('/signup', async (req, res) => {
         if (role == 'Manager') {
             status = 'Pending'
         }
+        else if (role == 'User') {
+        status = 'Approved';
+        }
         const user = new User({ username, password: hashedPassword, email, firstname, lastname, birthdate, gender, city, address, status });
         await user.save();
         res.status(201).json({ message: 'User signed up successfully' });

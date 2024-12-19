@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     city: { type: String, required: true },
     address: { type: String},
     role: { type: String, enum: ['Manager', 'User', 'Admin'], default:'User' },
-    status: { type: String,enum: ['Pending', 'Approved'], default:'Not Approved' },
+    status: { type: String,enum: ['Pending', 'Approved', 'Not Approved'], default:'Not Approved' },
     createdAt: { type: Date,default:Date.now},
 });
 

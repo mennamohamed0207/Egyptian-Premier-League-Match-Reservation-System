@@ -70,12 +70,9 @@ router.post('/signup', async (req, res) => {
         if (role == 'Manager') {
             status = 'Pending'
         }
-        else if (role == 'User') {
-        status = 'Approved';
-        }
-        const user = new User({ username, password: hashedPassword, email, firstname, lastname, birthdate, gender, city, address, status });
+        const user = new User({ username, password: hashedPassword, email, firstname, lastname, birthdate, gender, city, address, status, role });
         await user.save();
-        res.status(201).json({ message: 'User signed up successfully' });
+        res.status(201).json({ message: 'User signed up successfully', user });
     } catch (error) {
         res.status(500).json({ error: `Error in signup: ${error.message}` });
     }
@@ -119,7 +116,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Wrong Password' });
         }
         const token = jwt.sign({ userID: user._id }, 'secret-key', { expiresIn: '1d' });
-        res.status(200).json({ token });
+        res.status(200).json({ message: 'User logged in successfully', token, user });
     } catch (error) {
         res.status(500).json({ error: `Error in login: ${error.message} ` });
     }

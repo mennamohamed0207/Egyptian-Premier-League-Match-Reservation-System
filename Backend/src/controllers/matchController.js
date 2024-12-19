@@ -12,11 +12,11 @@ const verifyToken = require('../middlewares/auth');
  *   get:
  *     tags:
  *       - Match
- *     summary: Get all matches
- *     description: Fetches all matches from the database. If no matches are found, a 404 status is returned.
+ *     summary: Get all matches with stadium details
+ *     description: Fetches all matches from the database along with details of the stadium where each match is held. If no matches are found, a 204 status is returned.
  *     responses:
  *       200:
- *         description: A list of matches
+ *         description: A list of matches with stadium details
  *         content:
  *           application/json:
  *             schema:
@@ -38,8 +38,20 @@ const verifyToken = require('../middlewares/auth');
  *                     example: "Team B"
  *                   stadiumID:
  *                     type: string
- *                     description: Identifier for the stadium
+ *                     description: Unique identifier for the stadium
  *                     example: "60dabc1234567890abcdef12"
+ *                   stadiumName:
+ *                     type: string
+ *                     description: Name of the stadium
+ *                     example: "Stadium Name"
+ *                   stadiumLength:
+ *                     type: string
+ *                     description: Length of the stadium
+ *                     example: "100"
+ *                   stadiumWidth:
+ *                     type: string
+ *                     description: Width of the stadium
+ *                     example: "50"
  *                   seats:
  *                     type: array
  *                     description: 2D array representing the seating arrangement

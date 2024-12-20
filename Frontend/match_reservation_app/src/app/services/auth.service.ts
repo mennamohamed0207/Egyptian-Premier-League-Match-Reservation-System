@@ -29,12 +29,12 @@ export class AuthService {
 
     return this.http.post<any>(this.loginUrl, loginForm.value).pipe(
       tap(res => {
-        const token = res;
+        const token = res['token'];
         console.log(res);
         console.log(token);
         if (token) {
           localStorage.setItem('accessToken', token);
-          localStorage.setItem('username', loginForm.value.username);
+          localStorage.setItem('username', loginForm.value.user.username);
           this.tokenSubject.next(token);
         }
       })

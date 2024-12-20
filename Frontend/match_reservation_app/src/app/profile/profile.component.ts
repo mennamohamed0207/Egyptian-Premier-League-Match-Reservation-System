@@ -1,53 +1,94 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from '../services/user.service';
 import { CancelReservationDialogComponent } from '../cancel-reservation-dialog/cancel-reservation-dialog.component';
 
 @Component({
   selector: 'app-profile',
   standalone: false,
-  
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.css',
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   editMode = false;
+  user: any;
+  reservations: any[] = [];
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog) {
+  constructor(
+    private fb: FormBuilder,
+    private dialog: MatDialog,
+    private dataService: UserService
+  ) {
+    // Initialize an empty form
     this.profileForm = this.fb.group({
-      username: [{ value: 'john_doe', disabled: true }],
-      email: [{ value: 'john.doe@example.com', disabled: true }],
-      firstName: ['John', [Validators.required]],
-      lastName: ['Doe', [Validators.required]],
-      birthDate: ['1990-01-01', Validators.required],
-      gender: ['male', Validators.required],
-      city: ['New York'],
-      address: ['123 Main Street'],
-      role: [{ value: 'Fan', disabled: true }],
+      username: [{ value: '', disabled: true }],
+      email: [{ value: '', disabled: true }],
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      birthdate: ['', Validators.required],
+      gender: ['', Validators.required],
+      city: [''],
+      address: [''],
+      role: [{ value: '', disabled: true }],
     });
   }
 
-  onSubmit() {
-    if (this.profileForm.valid) {
-      const updatedProfile = this.profileForm.getRawValue();
-      console.log('Updated Profile:', updatedProfile);
-      this.editMode = false; // Exit edit mode
-    }
+  ngOnInit(): void {
+    const username = localStorage.getItem('username');
+    this.dataService.getUser(username).subscribe((data: any) => {
+      this.user = data.user;
+
+      // Update the form with the user data
+      this.profileForm.patchValue({
+        username: this.user.username,
+        email: this.user.email,
+        firstname: this.user.firstname,
+        lastname: this.user.lastname,
+        birthdate: this.user.birthdate,
+        gender: this.user.gender,
+        city: this.user.city,
+        address: this.user.address,
+        role: this.user.role,
+      });
+    });
+
+    // Fetch reservations from the database
+    this.dataService.getReservations().subscribe(
+      (data: any) => {
+        this.reservations = data.map((reservation: any) => ({
+          id: reservation._id,
+          homeTeam: reservation.homeTeam,
+          awayTeam: reservation.awayTeam,
+          stadiumName: reservation.stadiumName,
+          eventDate: new Date(reservation.dateTime),
+          seat: `Row ${reservation.seatRowIndex}, Seat ${reservation.seatColumnIndex}`,
+          mainReferee: reservation.mainReferee,
+          linesman1: reservation.linesman1,
+          linesman2: reservation.linesman2,
+        }));
+        console.log('Reservations:', this.reservations);
+      },
+      (error) => {
+        console.error('Error fetching reservations:', error);
+      }
+    );
+
   }
 
   resetForm() {
     this.editMode = false; // Exit edit mode
-    this.profileForm.reset({
+    this.profileForm.patchValue({
       username: 'john_doe',
       email: 'john.doe@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      birthDate: '1990-01-01',
+      firstname: 'John',
+      lastname: 'Doe',
+      birthdate: '1990-01-01',
       gender: 'male',
       city: 'New York',
       address: '123 Main Street',
-      role: 'Fan',
+      role: 'Fan'
     });
   }
 
@@ -59,21 +100,20 @@ export class ProfileComponent {
     return daysBeforeEvent >= 3;
   }
 
-
-
-  cancelReservation(reservationId: number, reservation: any): void {
+  cancelReservation(reservationId: string, reservation: any): void {
     const dialogRef = this.dialog.open(CancelReservationDialogComponent, {
       width: '400px',
       data: {
-        eventName: reservation.eventName,
-        eventDate: reservation.eventDate
-      }
+        eventName: `${reservation.homeTeam} vs ${reservation.awayTeam}`,
+        eventDate: reservation.eventDate,
+      },
     });
-  
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         // Logic to cancel the reservation
-        const reservationIndex = this.reservations.findIndex(r => r.id === reservationId);
+        const reservationIndex = this.reservations.findIndex(
+          (r) => r.id === reservationId
+        );
         if (reservationIndex !== -1) {
           this.reservations.splice(reservationIndex, 1);
           console.log('Reservation canceled successfully!');
@@ -81,19 +121,21 @@ export class ProfileComponent {
       }
     });
   }
-  reservations = [
-    {
-      id: 1,
-      eventName: 'Music Concert',
-      eventDate: new Date('2024-12-20'),
-      seats: ['A1', 'A2']
-    },
-    {
-      id: 2,
-      eventName: 'Art Exhibition',
-      eventDate: new Date('2024-12-18'),
-      seats: ['B5']
-    }
-  ];
 
+  onSubmit() {
+    if (this.profileForm.valid) {
+      const updatedProfile = this.profileForm.getRawValue();
+      const username = this.profileForm.get('username')?.value; // Get the username from the form
+      updatedProfile.birthdate = new Date(updatedProfile.birthdate);
+      this.dataService.updateProfile(username, updatedProfile).subscribe(
+        (response) => {
+          console.log('Profile updated successfully:', response);
+          this.editMode = false; // Exit edit mode
+        },
+        (error) => {
+          console.error('Error updating profile:', error);
+        }
+      );
+    }
+  }
 }

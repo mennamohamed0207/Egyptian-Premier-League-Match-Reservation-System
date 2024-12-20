@@ -8,19 +8,19 @@
         </button>
     </div>
 
-    <div class="profile-content">
+    <form [formGroup]="profileForm" class="profile-content">
         <!-- Personal Information -->
         <div class="details-card">
             <h3>Personal Information</h3>
             <ul>
                 <li>
-                    <strong>Username:</strong> {{ profileForm.value.username }}
+                    <strong>Username:</strong> {{ this.user.username }}
                 </li>
                 <li>
-                    <strong>Email:</strong> {{ profileForm.value.email }}
+                    <strong>Email:</strong> {{ this.user.email }}
                 </li>
                 <li *ngIf="!editMode">
-                    <strong>Birth Date:</strong> {{ profileForm.value.birthDate | date }}
+                    <strong>Birth Date:</strong> {{ this.user.birthdate | date: 'yyyy-MM-dd' }}
                 </li>
                 <li *ngIf="editMode">
                     <label for="birthDate">Birth Date:</label>
@@ -34,7 +34,6 @@
                     <select id="gender" formControlName="gender">
                         <option value="male">Male</option>
                         <option value="female">Female</option>
-                        <option value="other">Other</option>
                     </select>
                 </li>
             </ul>
@@ -57,26 +56,26 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </form>
 
     <!-- Save and Cancel Buttons -->
     <div class="profile-actions" *ngIf="editMode">
         <button (click)="onSubmit()" [disabled]="!profileForm.valid">Save Changes</button>
         <button (click)="resetForm()">Cancel</button>
     </div>
+
     <!-- Reservations Section -->
     <div class="reservations-section">
         <h3>Your Reservations</h3>
         <div *ngIf="reservations.length > 0; else noReservations">
             <div class="reservation-card" *ngFor="let reservation of reservations">
                 <div class="reservation-info">
-                    <h4>{{ reservation.eventName }}</h4>
-                    <p>
-                        <strong>Date:</strong> {{ reservation.eventDate | date }}
-                    </p>
-                    <p>
-                        <strong>Seats:</strong> {{ reservation.seats.join(', ') }}
-                    </p>
+                    <h4>{{ reservation.homeTeam }} vs {{ reservation.awayTeam }}</h4>
+                    <p><strong>Stadium:</strong> {{ reservation.stadiumName }}</p>
+                    <p><strong>Date:</strong> {{ reservation.eventDate | date: 'short' }}</p>
+                    <p><strong>Seats:</strong> {{ reservation.seat }}</p>
+                    <p><strong>Main Referee:</strong> {{ reservation.mainReferee }}</p>
+                    <p><strong>Linesmen:</strong> {{ reservation.linesman1 }}, {{ reservation.linesman2 }}</p>
                     <p>
                         <strong>Status:</strong>
                         <span *ngIf="canCancel(reservation.eventDate)">Cancellable</span>
@@ -84,11 +83,11 @@
                     </p>
                 </div>
                 <button 
-                *ngIf="canCancel(reservation.eventDate)" 
-                (click)="cancelReservation(reservation.id, reservation)" 
-                class="cancel-button">
-                Cancel Reservation
-            </button>
+                    *ngIf="canCancel(reservation.eventDate)" 
+                    (click)="cancelReservation(reservation.id, reservation)" 
+                    class="cancel-button">
+                    Cancel Reservation
+                </button>
             </div>
         </div>
         <ng-template #noReservations>

@@ -26,7 +26,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { CancelReservationDialogComponent } from './cancel-reservation-dialog/cancel-reservation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button'; // For buttons
-import { MatIconModule } from '@angular/material/icon';     // For icons (if needed)
+import { MatIconModule } from '@angular/material/icon';
+import { ReservationConfirmationDialogComponent } from './reservation-confirmation-dialog/reservation-confirmation-dialog.component';     // For icons (if needed)
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MatIconModule } from '@angular/material/icon';     // For icons (if nee
     ProfileComponent,
     AdminComponent,
     CancelReservationDialogComponent,
+    ReservationConfirmationDialogComponent,
 
   ],
   imports: [

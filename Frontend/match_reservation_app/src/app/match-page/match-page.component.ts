@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatchService } from '../services/match.service';
+import { CancelReservationDialogComponent } from '../cancel-reservation-dialog/cancel-reservation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ReservationConfirmationDialogComponent } from '../reservation-confirmation-dialog/reservation-confirmation-dialog.component';
 
 @Component({
   selector: 'app-match-page',
@@ -76,11 +79,43 @@ export class MatchPageComponent implements OnInit {
   }
 
 
-  constructor(private route: ActivatedRoute, private dataService: MatchService) {
+  selectedChairs: {
+    seatRowIndex: number;
+    seatColumnIndex: number;
+  }[] = [];
+
+  constructor(private route: ActivatedRoute, private dataService: MatchService, public dialog: MatDialog) {
   }
   changeColor(i: number, j: number) {
     if (this.chairs_colors[i][j] == this.reserved) return;
     this.chairs_colors[i][j] =
       this.chairs_colors[i][j] == this.available ? this.selected : this.available;
+    //store the selected chairs to send them to backend
+    this.selectedChairs.push({
+      seatRowIndex: i,
+      seatColumnIndex: j
+    });
   }
+  addTicket() {
+    for (let i = 0; i < this.selectedChairs.length; i++) {
+      this.dataService.reserveSeat(this.matchid, this.selectedChairs[i]).subscribe(
+        (data) => {
+          console.log(data);
+
+        });
+    }
+    // Update reserved seats color
+    this.selectedChairs.forEach(({ seatRowIndex, seatColumnIndex }) => {
+      this.chairs_colors[seatRowIndex][seatColumnIndex] = this.reserved;
+    });
+
+    // Show confirmation dialog
+    this.dialog.open(ReservationConfirmationDialogComponent);
+
+    // Clear the selected chairs array
+    this.selectedChairs = [];
+
+  }
+
+
 }

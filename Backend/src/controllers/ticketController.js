@@ -207,19 +207,45 @@ router.post('/:matchId', verifyToken, async (req, res) => {
  */
 router.get('/', verifyToken, async (req, res) => {
     const userID = req.userID;
+
     try {
-        const tickets = await Ticket.find({"userID":userID});
+        // Fetch tickets for the user and populate the Match details
+        const tickets = await Ticket.find({ userID }).populate({
+            path: 'matchID',
+            populate: { path: 'stadiumID' } // Populate stadium details if referenced
+        });
+
         if (tickets.length > 0) {
-            res.status(200).json(tickets);
+            const transformedTickets = tickets.map(ticket => {
+                const match = ticket.matchID || {};
+                const stadium = match.stadiumID || {};
+                return {
+                    _id: match._id || null,
+                    homeTeam: match.homeTeam || 'Unknown',
+                    awayTeam: match.awayTeam || 'Unknown',
+                    stadiumID: stadium._id || null,
+                    stadiumName: stadium.name || 'Unknown',
+                    dateTime: match.dateTime || null,
+                    mainReferee: match.mainReferee || 'Unknown',
+                    linesman1: match.linesman1 || 'Unknown',
+                    linesman2: match.linesman2 || 'Unknown',
+                    userID: ticket.userID,
+                    seatRowIndex: ticket.seatRowIndex,
+                    seatColumnIndex: ticket.seatColumnIndex
+                };
+            });
+
+            res.status(200).json(transformedTickets);
         } else {
             res.status(204).send({ message: 'No matches found' });
         }
 
     } catch (error) {
-        console.error('Error fetching ticket:', error);
+        console.error('Error fetching tickets:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 /**
  * @swagger

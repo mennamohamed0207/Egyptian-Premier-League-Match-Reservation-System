@@ -622,6 +622,6 @@ router.get('/:matchId/seats', async (req, res) => {
         res.status(500).send({ message: 'Error fetching match' });
     }
 });
-// rawan_manager, securePassword123 , eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NzVmMjMwYzAzZmFlNzBlNDMxZjc2MjYiLCJpYXQiOjE3MzQyODgyOTAsImV4cCI6MTczNDM3NDY5MH0.AY1Hhs0vQYzOK9hxa8gXmVlysog9oBIr1dBJlSzs28w
-// rawan, rawan123, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NzVmMTEyM2QyNDRhNmNjMjY4YzYwNzgiLCJpYXQiOjE3MzQyODkyMDAsImV4cCI6MTczNDM3NTYwMH0.G0RG70Kn8mwA67b86UkS1ZA8LMNevRI-zLm0BNCpl3M
+// rawan_manager, securePassword123 , eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NzVmMjMwYzAzZmFlNzBlNDMxZjc2MjYiLCJpYXQiOjE3MzQ3MDU5MTEsImV4cCI6MTczNDc5MjMxMX0.FOf1-qRO8A3_uo_P3xkTLu2BCnNzDoHuwWam0J6Tk_Q
+// rawan, rawan123, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NzVmMTEyM2QyNDRhNmNjMjY4YzYwNzgiLCJpYXQiOjE3MzQ3MDEzNzUsImV4cCI6MTczNDc4Nzc3NX0.JRdeZ0wjU41HsW5hbl4jxIRhn0v9d58xUJ86HZfRqA0
 module.exports = router;

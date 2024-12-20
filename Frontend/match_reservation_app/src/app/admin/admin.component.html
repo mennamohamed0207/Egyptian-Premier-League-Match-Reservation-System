@@ -16,27 +16,21 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of allUsers">
-          <td>{{ user.id }}</td>
+          <td>{{ user._id }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.isManager ? "Yes" : "No" }}</td>
+          <td>{{ user.role}}</td>
           <td>
             <button
               class="fancy-button"
-              *ngIf="!user.isManager"
-              (click)="addAuthority(user.id)"
+              *ngIf="user.role == 'User'"
+              (click)="addAuthority(user._id)"
             >
               Add Authority
             </button>
-            <button
-              class="fancy-button"
-              *ngIf="user.isManager"
-              (click)="removeAuthority(user.id)"
-            >
-              Remove Authority
-            </button>
+      
           </td>
           <td>
-            <button class="fancy-button" (click)="removeUserAccount(user.id)">
+            <button class="fancy-button" (click)="removeUserAccount(user._id)">
               Remove Account
             </button>
           </td>

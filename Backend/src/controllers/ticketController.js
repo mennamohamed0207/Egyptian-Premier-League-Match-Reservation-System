@@ -140,7 +140,7 @@ router.post('/:matchId', verifyToken, async (req, res) => {
  * /ticket:
  *   get:
  *     summary: Get all tickets for the authenticated user
- *     description: Retrieves a list of tickets reserved by the authenticated user. Requires a valid token.
+ *     description: Retrieves a list of tickets reserved by the authenticated user with detailed match and stadium information. Requires a valid token.
  *     tags: 
  *       - Ticket
  *     parameters:
@@ -162,18 +162,43 @@ router.post('/:matchId', verifyToken, async (req, res) => {
  *               items:
  *                 type: object
  *                 properties:
- *                   matchID:
+ *                   _id:
  *                     type: string
- *                     example: 64a2c6f734edf8456d3c5f89
+ *                     example: "675f89a67a7d9c29477df74c"
+ *                   homeTeam:
+ *                     type: string
+ *                     example: "ahlyyyy22222"
+ *                   awayTeam:
+ *                     type: string
+ *                     example: "zamalekkkkkkk"
+ *                   stadiumID:
+ *                     type: string
+ *                     example: "675f832d77bffd400eeb8b94"
+ *                   stadiumName:
+ *                     type: string
+ *                     example: "New stadium"
+ *                   dateTime:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2024-12-07T17:00:00.000Z"
+ *                   mainReferee:
+ *                     type: string
+ *                     example: "Referee John Doe"
+ *                   linesman1:
+ *                     type: string
+ *                     example: "Linesman Jane Doe"
+ *                   linesman2:
+ *                     type: string
+ *                     example: "Linesman Tom Smith"
  *                   userID:
  *                     type: string
- *                     example: 64a2c7e834edf8456d3c5f90
+ *                     example: "675f1123d244a6cc268c6078"
  *                   seatRowIndex:
  *                     type: integer
  *                     example: 1
  *                   seatColumnIndex:
  *                     type: integer
- *                     example: 2
+ *                     example: 1
  *       204:
  *         description: No tickets found for the user
  *         content:
@@ -209,10 +234,9 @@ router.get('/', verifyToken, async (req, res) => {
     const userID = req.userID;
 
     try {
-        // Fetch tickets for the user and populate the Match details
         const tickets = await Ticket.find({ userID }).populate({
             path: 'matchID',
-            populate: { path: 'stadiumID' } // Populate stadium details if referenced
+            populate: { path: 'stadiumID' }
         });
 
         if (tickets.length > 0) {

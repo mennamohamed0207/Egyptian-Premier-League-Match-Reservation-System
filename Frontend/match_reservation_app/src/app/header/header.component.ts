@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     this.username = null;
 
     // Redirect to home or login page
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
 
 }

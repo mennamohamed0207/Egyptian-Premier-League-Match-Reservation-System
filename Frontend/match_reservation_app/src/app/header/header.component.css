@@ -33,3 +33,13 @@
     align-items: center;
     gap: 10px;
 }
+.navbar ul li button {
+    background: none;
+    border: none;
+    color: #4f772dff;
+    cursor: pointer;
+}
+
+.navbar ul li button:hover {
+    color: #31572cff;
+}

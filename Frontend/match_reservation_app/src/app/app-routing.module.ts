@@ -26,7 +26,7 @@ const routes: Routes = [
     component: HomePageComponent,
   },
   {
-    path: 'match',
+    path: 'match/:id',
     component: MatchPageComponent
   },
   {

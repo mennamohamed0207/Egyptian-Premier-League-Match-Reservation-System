@@ -17,4 +17,7 @@ export class MatchService {
   createMatch(match: any): Observable<any> {
     return this.http.post(this.apiUrl, match);
   }
+  getMatch(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
 }

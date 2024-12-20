@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-match-card',
@@ -9,16 +10,22 @@ import { Component, Input } from '@angular/core';
 })
 export class MatchCardComponent {
   @Input() match!: {
-    id: string;
+    _id: number;
     homeTeam: string;
     awayTeam: string;
     dateTime: string;
     stadium: string;
     mainReferee: string;
+    linesman1: string;
+    linesman2: string;
+    stadiumLength: number;  
+    stadiumWidth: number;
+    stadiumName: string;
+    seats: number[][];
   };
+  constructor(private router: Router) {}
 
-  bookTicket(matchId: string) {
-    console.log(`Ticket booked for match ID: ${matchId}`);
-    // Add navigation or service logic for booking
+  bookTicket(matchId: number): void {
+    this.router.navigateByUrl('/match/' + matchId, { state: { data: this.match } });
   }
 }

@@ -1,23 +1,24 @@
 <div class="match-page">
   <div class="container">
   <!-- Match Details Section -->
+  
   <div class="match-details card shadow-lg mb-4 p-4">
     <div class="row align-items-center">
       <div class="col text-center">
         <img class="team-img" src="Al_Ahly1.png" alt="Al Ahly" />
-        <h3 class="teams-name">Al Ahly</h3>
+        <h3 class="teams-name">{{match.homeTeam}}</h3>
       </div>
       <div class="col text-center">
         <p class="match-time text-primary font-weight-bold">7:00 PM</p>
         <p class="match-venue">
-          <i class="fas fa-map-marker-alt"></i> Cairo Stadium <br />
-          <i class="fas fa-user-tie"></i> Main Referee <br />
-          <i class="fas fa-users"></i> Two Linesmen
+          <i class="fas fa-map-marker-alt"></i>{{match.stadiumID.name}}<br />
+          <i class="fas fa-user-tie"></i> {{match.mainReferee}} <br />
+          <i class="fas fa-users"></i> {{match.linesman1}}, {{match.linesman2}}
         </p>
       </div>
       <div class="col text-center">
         <img class="team-img" src="AL_Zamalek.png" alt="Al Zamalek" />
-        <h3 class="teams-name">Al Zamalek</h3>
+        <h3 class="teams-name">{{match.awayTeam}}</h3>
       </div>
     </div>
   </div>

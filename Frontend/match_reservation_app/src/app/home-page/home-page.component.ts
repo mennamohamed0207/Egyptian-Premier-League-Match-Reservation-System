@@ -37,7 +37,7 @@ export class HomePageComponent implements OnInit {
   loadData(): void {
     this.subscription = this.matchService.getMatches().subscribe((data) => {
       this.matches = data;
-      console.log(this.matches);
+      // console.log(this.matches);
     });
   }
 

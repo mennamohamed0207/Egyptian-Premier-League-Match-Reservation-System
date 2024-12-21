@@ -113,4 +113,19 @@ router.post('/',verifyToken, async (req, res) => {
         res.status(500).json({ message: 'Error adding stadium', error });
     }
 })
+
+router.get('/',verifyToken, async (req, res) => {
+    try {
+        const stadiums = await Stadium.find();
+        
+        if (stadiums.length > 0) {
+            res.status(200).json(stadiums);
+        } else {
+            res.status(204).send({ message: 'No stadiums found' });
+        }
+    } catch (err) {
+        console.error('Error fetching stadiums:', err);
+        res.status(500).send({ message: 'Error fetching stadiums' });
+    }
+})
 module.exports = router;

@@ -17,7 +17,14 @@
                 </select>
             </div>
 
-    
+            <!-- Venue -->
+            <div class="form-group">
+                <label for="venue">Match Venue:</label>
+                <select id="venue" formControlName="venue" >
+                    <option *ngFor="let venue of venues" [ngValue]="venue">{{ venue.name }}</option>
+                </select>
+            </div>
+
             <!-- Date & Time -->
             <div class="form-group">
                 <label for="matchDate">Match Date & Time:</label>

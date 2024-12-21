@@ -41,4 +41,9 @@ export class MatchService {
     const headers = new HttpHeaders().set('JWT-Token', `${token}`).set('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/stadium', stadium, { headers });
   }
+  getStadiums(): Observable<any> {
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('accessToken') : null; // Replace with your token retrieval logic
+    const headers = new HttpHeaders().set('JWT-Token', `${token}`).set('Content-Type', 'application/json');
+    return this.http.get('http://localhost:3000/stadium',{headers});
+  }
 }

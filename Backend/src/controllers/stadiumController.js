@@ -113,7 +113,79 @@ router.post('/',verifyToken, async (req, res) => {
         res.status(500).json({ message: 'Error adding stadium', error });
     }
 })
-
+/**
+ * @swagger
+ * /stadium:
+ *   get:
+ *     summary: Get all stadiums
+ *     description: Retrieves a list of all stadiums. Requires a valid token.
+ *     tags: 
+ *       - Stadium
+ *     parameters:
+ *       - name: JWT-Token
+ *         in: header
+ *         required: true
+ *         description: Bearer token for user authentication
+ *         schema:
+ *           type: string
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Stadiums retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     example: "675f3eeca67a3e61e4e71d68"
+ *                   name:
+ *                     type: string
+ *                     example: "Cairo stadium"
+ *                   length:
+ *                     type: integer
+ *                     example: 40
+ *                   width:
+ *                     type: integer
+ *                     example: 20
+ *                   __v:
+ *                     type: integer
+ *                     example: 0
+ *       204:
+ *         description: No stadiums found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: No stadiums found
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Unauthorized
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error fetching stadiums
+ */
 router.get('/',verifyToken, async (req, res) => {
     try {
         const stadiums = await Stadium.find();

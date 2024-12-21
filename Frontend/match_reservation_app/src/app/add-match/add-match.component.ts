@@ -42,6 +42,7 @@ export class AddMatchComponent {
         mainReferee: formValues.mainReferee,
         linesman1: formValues.linesman1,
         linesman2: formValues.linesman2,
+        seats: []
         
       };
 

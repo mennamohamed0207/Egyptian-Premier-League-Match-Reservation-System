@@ -4,6 +4,7 @@ import { MatchService } from '../services/match.service';
 import { CancelReservationDialogComponent } from '../cancel-reservation-dialog/cancel-reservation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ReservationConfirmationDialogComponent } from '../reservation-confirmation-dialog/reservation-confirmation-dialog.component';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-match-page',
@@ -53,29 +54,34 @@ export class MatchPageComponent implements OnInit {
   reserved_chairs: number[][] = [[0, 1, 1, 0, 1], [0, 0, 0, 1, 1], [1, 0, 1, 0, 1]];
   ngOnInit(): void {
 
+    // Poll every 5 seconds
+    // interval(5000).subscribe(() => {
+      this.dataService.getMatch(this.matchid).subscribe((data) => {
+        this.match = data;
+        console.log(this.match);
+        this.rows = this.match.stadiumID.length;
+        this.cols = this.match.stadiumID.width;
+        this.reserved_chairs = this.match.seats;
+        for (let i = 0; i < this.rows; i++) {
+          let chairs_row: string[] = [];
+          for (let j = 0; j < this.cols; j++) {
+            if (this.reserved_chairs[i][j] == 1)
+              chairs_row.push(this.reserved);
+            else
+              chairs_row.push(this.available);
+
+          }
+          this.chairs_colors.push(chairs_row);
+        }
+      });
+    // });
+
     this.route.params.subscribe((params) => {
       this.matchid = params['id'];
     }
 
     );
-    this.dataService.getMatch(this.matchid).subscribe((data) => {
-      this.match = data;
-      console.log(this.match);
-      this.rows = this.match.stadiumID.length;
-      this.cols = this.match.stadiumID.width;
-      this.reserved_chairs = this.match.seats;
-      for (let i = 0; i < this.rows; i++) {
-        let chairs_row: string[] = [];
-        for (let j = 0; j < this.cols; j++) {
-          if (this.reserved_chairs[i][j] == 1)
-            chairs_row.push(this.reserved);
-          else
-            chairs_row.push(this.available);
 
-        }
-        this.chairs_colors.push(chairs_row);
-      }
-    });
   }
 
 

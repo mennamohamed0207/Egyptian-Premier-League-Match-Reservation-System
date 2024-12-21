@@ -22,7 +22,7 @@ export class MatchService {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
   reserveSeat(matchid: string, seats: any) {
-    const token = localStorage.getItem('accessToken'); // Replace with your token retrieval logic
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('accessToken') : null; // Replace with your token retrieval logic
     console.log(token);
 
     const headers = new HttpHeaders().set('JWT-Token', `${token}`).set('Content-Type', 'application/json');

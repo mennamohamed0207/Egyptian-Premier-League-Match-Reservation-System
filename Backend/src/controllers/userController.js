@@ -100,7 +100,9 @@ router.post('/signup', async (req, res) => {
  *       200:
  *         description: Successful login
  *       401:
- *         description: Unauthorized
+ *         description: Wrong Password
+ *       404:
+ *         description: User not Found
  *       500:
  *         description: Error in login
  */

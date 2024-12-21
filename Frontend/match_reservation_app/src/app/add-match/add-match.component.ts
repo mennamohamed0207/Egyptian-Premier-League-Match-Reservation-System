@@ -1,26 +1,29 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatchService } from '../services/match.service';
 
 @Component({
   selector: 'app-add-match',
   standalone: false,
-  
   templateUrl: './add-match.component.html',
-  styleUrl: './add-match.component.css'
+  styleUrls: ['./add-match.component.css']
 })
 export class AddMatchComponent {
   matchForm: FormGroup;
   teams = ['Team A', 'Team B', 'Team C', 'Team D']; // Replace with your team list
-  venues = ['Stadium 1', 'Stadium 2', 'Stadium 3']; // Replace with your venue list
+  venues = [
+    { id: '60dabc1234567890abcdef12', name: 'Stadium 1' }, 
+    { id: '60dabc1234567890abcdef13', name: 'Stadium 2' },
+    { id: '60dabc1234567890abcdef14', name: 'Stadium 3' }
+  ]; // Replace with your venue list
   referees = ['Referee 1', 'Referee 2', 'Referee 3']; // Replace with referee list
   linesmen = ['Linesman 1', 'Linesman 2', 'Linesman 3']; // Replace with linesmen list
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private matchService: MatchService) {
     this.matchForm = this.fb.group({
       homeTeam: ['', Validators.required],
       awayTeam: ['', Validators.required],
-      venue: ['', Validators.required],
-      matchDate: ['', Validators.required],
+      dateTime: ['', Validators.required],
       mainReferee: ['', Validators.required],
       linesman1: ['', Validators.required],
       linesman2: ['', Validators.required],
@@ -29,8 +32,32 @@ export class AddMatchComponent {
 
   onSubmit() {
     if (this.matchForm.valid) {
-      console.log('Match Details:', this.matchForm.value);
-      // Add your submission logic here
+      const formValues = this.matchForm.value;
+      console.log('Match Details:', formValues);
+      const match = {
+        homeTeam: formValues.homeTeam,
+        awayTeam: formValues.awayTeam,
+        stadiumID: "60dabc1234567890abcdef12", // Replace with your stadium ID
+        dateTime: formValues.dateTime,
+        mainReferee: formValues.mainReferee,
+        linesman1: formValues.linesman1,
+        linesman2: formValues.linesman2,
+        
+      };
+
+      this.matchService.addMatch(match).subscribe({
+        next: (response) => {
+          console.log('Match added successfully:', response);
+          alert('Match added successfully');
+          this.resetForm();
+        },
+        error: (err) => {
+          console.error('Error adding match:', err);
+          alert('Failed to add match');
+        }
+      });
+    } else {
+      alert('Please fill in all required fields');
     }
   }
 

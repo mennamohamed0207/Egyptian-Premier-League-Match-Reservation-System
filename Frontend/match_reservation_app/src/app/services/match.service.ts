@@ -9,7 +9,7 @@ export class MatchService {
   private apiUrl = 'http://localhost:3000/match';
   private ticketUrl = 'http://localhost:3000/ticket'
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getMatches(): Observable<any> {
     return this.http.get(this.apiUrl);
@@ -21,11 +21,17 @@ export class MatchService {
   getMatch(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
-  reserveSeat(matchid:string,seats:any)
-  {
+  reserveSeat(matchid: string, seats: any) {
     const token = localStorage.getItem('accessToken'); // Replace with your token retrieval logic
     console.log(token);
-    
+
     const headers = new HttpHeaders().set('JWT-Token', `${token}`).set('Content-Type', 'application/json');
-    return this.http.post(`http://localhost:3000/ticket/675f89a67a7d9c29477df74c`, seats, { headers });  }
+    return this.http.post(`http://localhost:3000/ticket/675f89a67a7d9c29477df74c`, seats, { headers });
+  }
+  addMatch(match: any): Observable<any> {
+    const token = localStorage.getItem('accessToken'); // Replace with your token retrieval logic
+    console.log(token);
+    const headers = new HttpHeaders().set('JWT-Token', `${token}`).set('Content-Type', 'application/json');
+    return this.http.post(this.apiUrl, match, { headers });
+  }
 }

@@ -49,16 +49,17 @@ export class MatchPageComponent implements OnInit {
   available = '#ecf39eff';
   reserved = '#31572cff';
   selected = 'rgb(137, 224, 60)';
-  chairs_colors: string[][] = [];
+  chairs_colors: string[][] = Array.from({ length: this.rows }, () => Array(this.cols).fill('green'));
   reserved_chairs: number[][] = [[0, 1, 1, 0, 1], [0, 0, 0, 1, 1], [1, 0, 1, 0, 1]];
   ngOnInit(): void {
 
-    this.route.params.subscribe((params) => {
-      this.matchid = params['id'];
-    }
 
-    );
     this.dataService.getMatch(this.matchid).subscribe((data) => {
+      this.route.params.subscribe((params) => {
+        this.matchid = params['id'];
+      }
+
+      );
       this.match = data;
       console.log(this.match);
       this.rows = this.match.stadiumID.length;

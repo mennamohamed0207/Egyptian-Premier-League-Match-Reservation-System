@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class HomePageComponent implements OnInit {
   matches: any[] = [];
-  userType: 'fan' | 'manager' | 'site_admin' = 'fan'; // Default user type
+  userType: 'Fan' | 'Manager' | 'Admin' = 'Fan'; // Default user type
   token: string | null = null;
   username: string | null = null;
   private subscription: Subscription | undefined;
@@ -31,6 +31,7 @@ export class HomePageComponent implements OnInit {
   if (typeof window !== 'undefined') {
     this.token = localStorage.getItem('accessToken');
     this.username = localStorage.getItem('username'); // Assume username is also stored
+    this.userType=localStorage.getItem('role') as 'Fan' | 'Manager' | 'Admin';
   }
   }
 
@@ -46,6 +47,7 @@ export class HomePageComponent implements OnInit {
     // Clear token and username
     localStorage.removeItem('accessToken');
     localStorage.removeItem('username');
+    localStorage.removeItem('role');
     this.token = null;
     this.username = null;
 
@@ -56,10 +58,13 @@ export class HomePageComponent implements OnInit {
   onManageMatches(): void {
     console.log('Navigating to manage matches...');
     // Implement navigation or action
+    this.router.navigate(['add-match']);
   }
 
   onViewReports(): void {
     console.log('Viewing reports...');
+    this.router.navigate(['add-stadium']);
+
     // Implement navigation or action
   }
 }

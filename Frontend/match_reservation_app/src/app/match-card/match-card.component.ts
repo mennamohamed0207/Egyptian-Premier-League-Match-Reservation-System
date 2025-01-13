@@ -28,4 +28,17 @@ export class MatchCardComponent {
   bookTicket(matchId: number): void {
     this.router.navigateByUrl('/match/' + matchId, { state: { data: this.match } });
   }
+  notuser(): boolean {
+    // const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+    // console.log(token);
+    
+    // if (token==null){
+
+    //   return false;
+    // }
+    // else{
+    //   return true;
+    // }
+    return false;
+  }
 }

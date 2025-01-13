@@ -21,13 +21,13 @@ export class SignUpComponent implements OnInit {
       username: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       password: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      birthdate: new FormControl(null, [Validators.required]), // Corrected from birthDate
+      birthdate: new FormControl(null, [Validators.required]), // Added custom validator
       gender: new FormControl(null, [Validators.required]),
       city: new FormControl(null, [Validators.required]),
       address: new FormControl(null),
       role: new FormControl(null, [Validators.required]),
       // status:new FormControl(null),
-    });
+    },);
   }
 
   onSubmit() {

@@ -11,9 +11,9 @@
 
 
 <!-- Conditional Buttons for Manager or Site Admin -->
-<div *ngIf="userType === 'manager' || userType === 'site_admin'" class="manager-buttons">
-  <button class="fancy-button" (click)="onManageMatches()">Manage Matches</button>
-  <button class="fancy-button" (click)="onViewReports()">Manage Stadiums</button>
+<div *ngIf="userType === 'Manager' || userType === 'Admin'" class="manager-buttons">
+  <button class="fancy-button" (click)="onManageMatches()">Add Matches</button>
+  <button class="fancy-button" (click)="onViewReports()">Add Stadiums</button>
 </div>
 
 <div class="grid">

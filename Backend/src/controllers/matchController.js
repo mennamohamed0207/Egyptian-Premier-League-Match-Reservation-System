@@ -263,12 +263,30 @@ router.post('/', verifyToken, async (req, res) => {
 
     try {
         const manager = await User.findById(userID);
-        if(manager.role != 'Manager'){
+        if (manager.role !== 'Manager' ) {
             return res.status(403).json({ error: "Access denied: Managers only" });
         }
+
         const stadium = await Stadium.findById(stadiumID);
         if (!stadium) {
             return res.status(404).json({ error: 'Stadium not found' });
+        }
+
+        const matchStart = new Date(dateTime);
+        const matchEnd = new Date(matchStart.getTime() + 2 * 60 * 60 * 1000); 
+
+        const overlappingMatch = await Match.findOne({
+            stadiumID,
+            dateTime: {
+                $gte: new Date(matchStart.getTime() - 2 * 60 * 60 * 1000),
+                $lte: matchEnd, 
+            },
+        });
+
+        if (overlappingMatch) {
+            return res.status(400).json({ 
+                error: 'Another match is scheduled in the same stadium during this time.' 
+            });
         }
 
         const seats = Array.from({ length: stadium.length }, () =>
@@ -286,13 +304,19 @@ router.post('/', verifyToken, async (req, res) => {
             seats,
         });
 
+        if (match.homeTeam === match.awayTeam) {
+            return res.status(400).json({ error: "A team can't play itself" });
+        }
+
         await match.save();
         res.status(201).json(match);
+
     } catch (error) {
         console.error('Error creating match:', error);
         res.status(500).json({ error: error.message });
     }
 });
+
 
 
 /**

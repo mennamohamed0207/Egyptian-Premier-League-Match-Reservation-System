@@ -70,7 +70,7 @@ router.post('/signup', async (req, res) => {
         if (role == 'Manager') {
             status = 'Pending'
         }
-        const user = new User({ username, password: hashedPassword, email, firstname, lastname, birthdate, gender, city, address, status, role });
+        const user = new User({ username, password: hashedPassword, email, firstname, lastname, birthdate, gender, city, address, status, role: 'User' });
         await user.save();
         res.status(201).json({ message: 'User signed up successfully', user });
     } catch (error) {
@@ -100,9 +100,7 @@ router.post('/signup', async (req, res) => {
  *       200:
  *         description: Successful login
  *       401:
- *         description: Wrong Password
- *       404:
- *         description: User not Found
+ *         description: Unauthorized
  *       500:
  *         description: Error in login
  */

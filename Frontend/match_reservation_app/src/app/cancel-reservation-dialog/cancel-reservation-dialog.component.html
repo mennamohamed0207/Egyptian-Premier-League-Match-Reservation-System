@@ -1,0 +1,12 @@
+<div class="dialog-container">
+    <h2 mat-dialog-title>Cancel Reservation</h2>
+    <mat-dialog-content>
+        <p>Are you sure you want to cancel your reservation for:</p>
+        <p><strong>{{ data.eventName }}</strong></p>
+        <p>Date: {{ data.eventDate | date }}</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+        <button mat-raised-button class="green-text-button" (click)="onCancel()">No</button>
+        <button mat-raised-button class="green-text-button" (click)="onConfirm()">Yes, Cancel</button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,161 @@
+/* General Styling */
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.form-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    width: 750px;
+    margin-top: 20px;
+    border-top: 5px solid #31572cff; /* Accent color for a sporty vibe */
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #444;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    background-color: #f9f9f9;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+    background-color: #fff;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: #90a955ff;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #90a955ff;
+}
+
+/* Inline Form Items */
+.form-group-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group-inline label {
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+/* Horizontal Layout for First and Last Name */
+.showhorizontal {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.showhorizontal .form-group {
+    flex: 1;
+}
+
+/* Error Styling */
+.errorEmpty {
+    color: red;
+    font-size: 12px;
+    font-family: sans-serif;
+    padding-top: 5px;
+}
+
+input.ng-invalid.ng-touched {
+    border: 2px solid red;
+}
+
+.greenBorder {
+    border: 2px solid green;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    background: url('../../../public/Stadium.jpg') no-repeat center center/cover;
+    height: 200px;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 20px;
+}
+
+.hero-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background: rgba(0, 255, 0, 0.7); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-section h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section p {
+    font-size: 18px;
+    margin-top: 10px;
+}
+

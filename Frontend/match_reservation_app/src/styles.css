@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Roboto', sans-serif;; /* Replace 'Arial' with your desired font */
+}
+/* CSS HEX */
+/* --dark-green: #132a13ff;
+--hunter-green: #31572cff;
+--fern-green: #4f772dff;
+--moss-green: #90a955ff;
+--mindaro: #ecf39eff;
+*/
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

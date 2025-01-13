@@ -1,0 +1,45 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #222;
+    color: #4f772dff;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 60px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    margin: 0 10px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #4f772dff;
+}
+.navbar ul li a:hover {
+    color: #31572cff;
+}
+.username {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.navbar ul li button {
+    background: none;
+    border: none;
+    color: #4f772dff;
+    cursor: pointer;
+}
+
+.navbar ul li button:hover {
+    color: #31572cff;
+}

@@ -1,0 +1,111 @@
+/* Seat Color Definitions */
+:root {
+  --available-color: #ecf39eff; /* Available seats: Moss Green */
+  --reserved-color: #31572cff; /* Reserved seats: Red */
+  --selected-color: rgb(137, 224, 60); /* Selected seats: Yellow */
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.match-page {
+  background-image: url("../../../public/empty.jpg");
+  background-size: cover; /* Ensures the image covers the entire container */
+}
+
+.card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+}
+
+.team-img {
+  width: 80px;
+  height: 80px;
+}
+
+.teams-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.match-time {
+  font-size: 1.25rem;
+}
+
+.match-venue,
+.seat-reservation-title {
+  color: #31572cff;
+}
+
+/* --dark-green: #132a13ff;
+--hunter-green: #31572cff;
+--fern-green: #4f772dff;
+--moss-green: #90a955ff;
+--mindaro: #ecf39eff;
+*/
+.seat-legend {
+  margin-right: 10px;
+  align-content: center;
+  justify-content: center; /* Centers items horizontally */
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px; 
+  margin-top: 20px; /* Adjust spacing from surrounding elements */
+
+}
+
+.chair {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+  background-color: var(--available-color);
+  background-image: url("../../../public/chair.png");
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  border: none;
+  border-radius: 90px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin: 5px;
+}
+
+.chair:hover {
+  transform: scale(1.1);
+}
+
+.grid {
+  display: flex;
+  width: 100%;
+  border-radius: 40px;
+  flex-direction: column;
+  gap: 20px; /* Space between rows */
+  justify-content: center;
+  align-items: center;
+}
+
+
+.purchase-button {
+  padding-bottom: 30px;
+}
+
+.container {
+  padding: 70px;
+}
+/* Seat Legend Colors */
+.seat-legend .badge-success {
+  background-color: var(--available-color, #ecf39eff);
+  color: black;
+}
+
+.seat-legend .badge-danger {
+  background-color: var(--reserved-color, #31572cff);
+  color: black;
+}
+
+.seat-legend .badge-warning {
+  background-color: var(--selected-color, rgb(137, 224, 60));
+  color: black;
+}

@@ -1,0 +1,49 @@
+.dialog-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.dialog-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.dialog-container p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+mat-dialog-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+/* --dark-green: #132a13ff;
+--hunter-green: #31572cff;
+--fern-green: #4f772dff;
+--moss-green: #90a955ff;
+--mindaro: #ecf39eff;
+*/
+button {
+    font-size: 1rem;
+    padding: 8px 16px;
+    color: #90a955ff;
+
+}
+
+*{
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+}
+
+.green-text-button {
+    color: #90a955ff !important ;/* Makes the text green */
+    font-weight: bold; /* Optional: Makes the text bold */
+    text-transform: uppercase; /* Optional: Makes the text uppercase */
+}
+
+.green-text-button:hover {
+    color: #90a955ff; /* Changes color on hover for a stylish look */
+}

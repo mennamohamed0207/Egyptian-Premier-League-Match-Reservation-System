@@ -1,0 +1,45 @@
+
+#login .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  margin-bottom: 120px;
+
+  border: 1px solid #9C9C9C;
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#login-form div {
+  margin: 15px 0;
+}
+
+#login-form #register-link {
+  margin-top: 20px;
+}
+
+.btn-info {
+  width: 50%;
+}
+
+#login-button {
+  display: flex;
+  justify-content: center;
+}
+#login {
+  background-image: url("../../../public/stadium1.jpg");
+  background-size: cover;
+}
+
+.text-color{
+  color : #31572cff;
+}
+
+.checkbox{
+  margin: 5px;
+}
+
+.error-text{
+  color: red;
+}

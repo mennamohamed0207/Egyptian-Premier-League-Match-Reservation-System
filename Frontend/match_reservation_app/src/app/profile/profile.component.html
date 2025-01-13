@@ -1,0 +1,100 @@
+<app-header></app-header>
+<div class="profile-container">
+    <div class="profile-header">
+        <!-- <img src="default.jpeg" alt="User Profile Picture" class="profile-picture" /> -->
+        <h2 class="user-name">{{ profileForm.value.firstName }} {{ profileForm.value.lastName }}</h2>
+        <p class="user-role">{{ profileForm.value.role }}</p>
+        <button (click)="editMode = !editMode" class="edit-button">
+            {{ editMode ? 'Cancel' : 'Edit Profile' }}
+        </button>
+    </div>
+
+    <form [formGroup]="profileForm" class="profile-content">
+        <!-- Personal Information -->
+        <div class="details-card">
+            <h3>Personal Information</h3>
+            <ul>
+                <li>
+                    <strong>Username:</strong> {{ this.user.username }}
+                </li>
+                <li>
+                    <strong>Email:</strong> {{ this.user.email }}
+                </li>
+                <li *ngIf="!editMode">
+                    <strong>Birth Date:</strong> {{ this.user.birthdate | date: 'yyyy-MM-dd' }}
+                </li>
+                <li *ngIf="editMode">
+                    <label for="birthDate">Birth Date:</label>
+                    <input type="date" id="birthDate" formControlName="birthDate" />
+                </li>
+                <li *ngIf="!editMode">
+                    <strong>Gender:</strong> {{ profileForm.value.gender }}
+                </li>
+                <li *ngIf="editMode">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" formControlName="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </li>
+            </ul>
+
+            <ul>
+                <li *ngIf="!editMode">
+                    <strong>City:</strong> {{ profileForm.value.city || 'N/A' }}
+                </li>
+                <li *ngIf="editMode">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" formControlName="city" placeholder="Enter your city" />
+                </li>
+                <li *ngIf="!editMode">
+                    <strong>Address:</strong> {{ profileForm.value.address || 'N/A' }}
+                </li>
+                <li *ngIf="editMode">
+                    <label for="address">Address:</label>
+                    <textarea id="address" formControlName="address" rows="2"
+                        placeholder="Enter your address"></textarea>
+                </li>
+            </ul>
+        </div>
+    </form>
+
+    <!-- Save and Cancel Buttons -->
+    <div class="profile-actions" *ngIf="editMode">
+        <button (click)="onSubmit()" [disabled]="!profileForm.valid">Save Changes</button>
+        <button (click)="resetForm()">Cancel</button>
+    </div>
+
+    <!-- Reservations Section -->
+    <div class="reservations-section">
+        <h3>Your Reservations</h3>
+        <div *ngIf="reservations.length > 0; else noReservations">
+            <div class="reservation-card" *ngFor="let reservation of reservations">
+                <div class="reservation-info">
+                    <h4>{{ reservation.homeTeam }} vs {{ reservation.awayTeam }}</h4>
+                    <p><strong>Stadium:</strong> {{ reservation.stadiumName }}</p>
+                    <p><strong>Date:</strong> {{ reservation.eventDate | date: 'short' }}</p>
+                    <p><strong>Seats:</strong> {{ reservation.seat }}</p>
+                    <p><strong>Main Referee:</strong> {{ reservation.mainReferee }}</p>
+                    <p><strong>Linesmen:</strong> {{ reservation.linesman1 }}, {{ reservation.linesman2 }}</p>
+                    <p>
+                        <strong>Status:</strong>
+                        <span *ngIf="canCancel(reservation.eventDate)">Cancellable</span>
+                        <span *ngIf="!canCancel(reservation.eventDate)">Non-Cancellable</span>
+                    </p>
+                </div>
+                <button 
+                    *ngIf="canCancel(reservation.eventDate)" 
+                    (click)="cancelReservation(reservation.id, reservation)" 
+                    class="cancel-button">
+                    Cancel Reservation
+                </button>
+            </div>
+        </div>
+        <ng-template #noReservations>
+            <p>No reservations found.</p>
+        </ng-template>
+    </div>
+</div>
+
+<app-footer></app-footer>

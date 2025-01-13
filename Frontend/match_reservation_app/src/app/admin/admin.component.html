@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+<div class="admin-dashboard">
+
+  <!-- All Users Table -->
+  <section id="all-users">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Manager</th>
+          <th>Promote to Manager</th>
+          <th>Remove Account</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of allUsers">
+          <td>{{ user._id }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role}}</td>
+          <td>
+            <button
+              class="fancy-button"
+              *ngIf="user.role == 'User'"
+              (click)="addAuthority(user._id)"
+            >
+              Add Authority
+            </button>
+      
+          </td>
+          <td>
+            <button class="fancy-button" (click)="removeUserAccount(user._id)">
+              Remove Account
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

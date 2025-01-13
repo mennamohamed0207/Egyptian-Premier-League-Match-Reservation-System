@@ -1,0 +1,238 @@
+/* General Container Styling */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    padding: 30px 40px;
+    background-image: url('../../../public/background.jpeg');
+    /* Add image URL here */
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    color: white;
+    /* White text over the image */
+    backdrop-filter: blur(5px);
+    /* Adds a blur effect for readability */
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #31572c;
+    /* Hunter Green */
+    margin-bottom: 15px;
+}
+
+.user-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    /* Dark Green */
+    margin-bottom: 5px;
+}
+
+.user-role {
+    font-size: 1.1rem;
+    color: #31572c;
+    /* Hunter Green */
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Edit Profile Button */
+.edit-button {
+    padding: 10px 25px;
+    background-color: #7fa35f;
+    /* Fern Green */
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: #90a955;
+    /* Moss Green */
+}
+
+/* Profile Details Section */
+.profile-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+}
+
+.details-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.details-card h3 {
+    color: #31572c;
+    /* Hunter Green */
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.details-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.details-card li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.details-card label {
+    font-weight: 600;
+    color: #132a13;
+    /* Dark Green */
+}
+
+/* Inputs, Selects, Textareas */
+.details-card input,
+.details-card select,
+.details-card textarea {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #31572c;
+    /* Hunter Green */
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 8px;
+    transition: border-color 0.3s ease;
+    color: #333;
+}
+
+.details-card input:focus,
+.details-card select:focus,
+.details-card textarea:focus {
+    border-color: #4f772d;
+    /* Fern Green */
+    outline: none;
+}
+
+/* Profile Actions (Save/Cancel) */
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.profile-actions button {
+    padding: 12px 30px;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.profile-actions button:first-child {
+    background-color: #31572c;
+    /* Hunter Green */
+    color: white;
+}
+
+.profile-actions button:first-child:hover {
+    background-color: #4f772d;
+    /* Fern Green */
+}
+
+.profile-actions button:last-child {
+    background-color: #90a955;
+    /* Moss Green */
+    color: white;
+}
+
+.profile-actions button:last-child:hover {
+    background-color: #132a13;
+    /* Dark Green */
+}
+
+.reservations-section {
+    /* margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.reservation-card {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-info h4 {
+    margin: 0;
+    color: #333;
+}
+.reservation-card p {
+    margin: 0;
+    color: #555;
+}
+.reservations-section h3 {
+    margin: 10px;
+    align-items: center;
+    color: #31572c;
+    /* Hunter Green */
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.cancel-button {
+    background-color: #90a955ff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #90a955ff;
+}
+
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
